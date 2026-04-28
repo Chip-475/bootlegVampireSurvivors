@@ -12,6 +12,7 @@ public class player : MonoBehaviour
     public Vector3 mouseWorldPosition;
 
     [Header("Stats")]
+    public float atk;
     public float spd;
     public float aspd;
 
@@ -36,15 +37,15 @@ public class player : MonoBehaviour
         rb.linearVelocity = moveInput * spd;
     }
 
-    // Player WASD Input
+    // Player Controls
     public void move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
     public void attack(InputAction.CallbackContext context)
     {
-        if (!context.performed && !canAttack) return;
-        canAttack = false;
+        if (!context.performed || !canAttack) return;
+
         StartCoroutine(scythe.swing());
     }
 }
