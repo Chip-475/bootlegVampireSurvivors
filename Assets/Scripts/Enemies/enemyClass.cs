@@ -7,10 +7,16 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected Rigidbody2D rb;
     protected Collider2D _collider;
 
+    protected bool inRange;
+    protected bool detecting;
+
     [Header("Stats")]
     [SerializeField] protected float hp;
     protected float hpMax;
     [SerializeField] protected float spd;
+
+    public float fovRange;
+    [Range(0, 360)] public float fovAngle;
 
     protected virtual void Start()
     {
@@ -29,6 +35,10 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     {
         hp -= damage;
         Mathf.Clamp(hp, 0, hpMax);
+    }
+    protected void detect()
+    {
+        
     }
 
     // Interface Methods
