@@ -7,7 +7,11 @@ public class player : MonoBehaviour
     public Rigidbody2D rb;
     public GameObject scytheTrf;
     public scythe scythe;
+
+    public gameManager gameManager;
+
     public bool canAttack = true;
+
     public Vector3 mousePosition;
     public Vector3 mouseWorldPosition;
 
@@ -24,7 +28,7 @@ public class player : MonoBehaviour
         scythe = GetComponentInChildren<scythe>();
         scytheTrf.SetActive(true);
     }
-    void Update()
+    void FixedUpdate()
     {
         // Mouse Positions Assignment
         mousePosition = Mouse.current.position.ReadValue();
@@ -40,12 +44,20 @@ public class player : MonoBehaviour
     // Player Controls
     public void move(InputAction.CallbackContext context)
     {
+        if(data.isPaused) return;
+
         moveInput = context.ReadValue<Vector2>();
     }
     public void attack(InputAction.CallbackContext context)
     {
-        if (!context.performed || !canAttack) return;
+        if (!context.performed || !canAttack || data.isPaused) return;
 
         StartCoroutine(scythe.swing());
+    }
+    public void togglePause(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+
+        gameManager.togglePause();
     }
 }

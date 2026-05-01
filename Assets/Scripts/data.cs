@@ -4,5 +4,5 @@ using UnityEngine.Rendering;
 
 public class data : MonoBehaviour
 {
-    
+    public static bool isPaused;
 }
