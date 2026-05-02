@@ -7,7 +7,7 @@ public class gameManager : MonoBehaviour
 
     private void Start()
     {
-        data.isPaused = false;
+        data.isPaused = true;
         togglePause();
     }
 

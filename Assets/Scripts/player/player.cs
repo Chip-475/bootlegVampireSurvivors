@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class player : MonoBehaviour
+public class player : MonoBehaviour, IDamageable
 {
     [Header("Misc")]
     public Rigidbody2D rb;
@@ -16,6 +16,8 @@ public class player : MonoBehaviour
     public Vector3 mouseWorldPosition;
 
     [Header("Stats")]
+    public float hp;
+    private float hpMax;
     public float atk;
     public float spd;
     public float aspd;
@@ -30,12 +32,15 @@ public class player : MonoBehaviour
     }
     void FixedUpdate()
     {
+        hpMax = hp;
+
         // Mouse Positions Assignment
         mousePosition = Mouse.current.position.ReadValue();
         mouseWorldPosition = new Vector3(Camera.main.ScreenToWorldPoint(mousePosition).x, Camera.main.ScreenToWorldPoint(mousePosition).y, 0);
 
-        // Player Flip
-        var x = mouseWorldPosition.x >= transform.position.x ? transform.localScale = new Vector3(1, 1, 1) : transform.localScale = new Vector3(-1, 1, 1);
+        // Player Rotation
+        transform.rotation = utilitiesDB.LookAt2D(mouseWorldPosition - transform.position);
+        var x = mouseWorldPosition.x >= transform.position.x ? transform.localScale = new Vector3(1, 1, 1) : transform.localScale = new Vector3(1, -1, 1);
 
         // Player Movement
         rb.linearVelocity = moveInput * spd;
@@ -59,5 +64,20 @@ public class player : MonoBehaviour
         if (!context.performed) return;
 
         gameManager.togglePause();
+    }
+
+    // Player Misc
+    public void onDamaged(float damage)
+    {
+        hp -= damage;
+        Mathf.Clamp(hp, 0, hpMax);
+        if (hp == 0) Destroy(gameObject);
+        print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
+    }
+
+    // Interface Methods
+    public void damage(float damage)
+    {
+        onDamaged(damage);
     }
 }

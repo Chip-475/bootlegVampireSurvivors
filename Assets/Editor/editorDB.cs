@@ -13,14 +13,14 @@ public class fovEditor : Editor
         Handles.DrawSolidArc(
             enemy.transform.position,
             enemy.transform.forward,
-            Quaternion.AngleAxis(-enemy.fovAngle / 2, enemy.transform.forward) * enemy.transform.up,
+            Quaternion.AngleAxis(-enemy.fovAngle / 2, enemy.transform.forward) * enemy.transform.right,
             enemy.fovAngle,
             enemy.fovRange);
 
         Handles.color = Color.white;
         enemy.fovRange = Handles.ScaleValueHandle(
             enemy.fovRange,
-            enemy.transform.position + enemy.transform.up * enemy.fovRange,
+            enemy.transform.position + enemy.transform.right * enemy.fovRange,
             enemy.transform.rotation,
             2,
             Handles.SphereHandleCap,
