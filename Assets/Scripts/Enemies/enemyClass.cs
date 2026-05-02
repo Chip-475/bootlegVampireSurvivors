@@ -32,7 +32,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     }
     protected virtual void FixedUpdate()
     {
-        follow();
+        
     }
 
     protected void onDamaged(float damage)
@@ -44,14 +44,8 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
 
     //protected void detect()
     //{
-    //    // To code later
+    //    // To do
     //}
-
-    protected void follow()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
-        transform.rotation = utilitiesDB.LookAt2D(player.transform.position - transform.position);
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

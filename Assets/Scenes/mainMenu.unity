@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 989043944}
   - component: {fileID: 989043943}
   - component: {fileID: 989043942}
+  - component: {fileID: 989043945}
   m_Layer: 5
   m_Name: quitButton
   m_TagString: Untagged
@@ -416,7 +417,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 989043943}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 989043945}
+        m_TargetAssemblyTypeName: quitButton, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &989043943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,6 +530,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989043940}
   m_CullTransparentMesh: 1
+--- !u!114 &989043945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989043940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb507b50d073a314790b8cb091d42e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::quitButton
 --- !u!1 &1469926141
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +869,6 @@ GameObject:
   - component: {fileID: 1645854790}
   - component: {fileID: 1645854789}
   - component: {fileID: 1645854788}
-  - component: {fileID: 1645854792}
   - component: {fileID: 1645854791}
   m_Layer: 5
   m_Name: startButton
@@ -916,9 +940,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1645854792}
-        m_TargetAssemblyTypeName: utilitiesDB, Assembly-CSharp
-        m_MethodName: loadFunc
+      - m_Target: {fileID: 1645854791}
+        m_TargetAssemblyTypeName: startButton, Assembly-CSharp
+        m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1037,23 +1061,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1645854786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 584d6a44fdab2be458d186ebfa0f299c, type: 3}
+  m_Script: {fileID: 11500000, guid: 999f1cbe6c1da6c4494d6f361dfd1843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::startButton
-  toLoad: gameScene
---- !u!114 &1645854792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1645854786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f3b959de4737e14ea09ea00065eb78c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::utilitiesDB
-  toLoad: gameScene
 --- !u!1 &1663416846
 GameObject:
   m_ObjectHideFlags: 0

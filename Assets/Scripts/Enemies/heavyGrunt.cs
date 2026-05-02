@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class lightGrunt : enemyClass
+public class heavyGrunt : enemyClass
 {
     private new void Start()
     {
         base.Start();
 
-        spawnManager.lightGruntAmount++;
+        spawnManager.heavyGruntAmount++;
     }
     private new void FixedUpdate()
     {
@@ -23,6 +23,6 @@ public class lightGrunt : enemyClass
 
     private void OnDestroy()
     {
-        spawnManager.lightGruntAmount--;
+        spawnManager.heavyGruntAmount--;
     }
 }

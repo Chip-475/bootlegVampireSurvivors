@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class lightGrunt : enemyClass
+public class rangedGrunt : enemyClass
 {
     private new void Start()
     {
         base.Start();
 
-        spawnManager.lightGruntAmount++;
+        spawnManager.rangedGruntAmount++;
     }
     private new void FixedUpdate()
     {
@@ -16,13 +16,16 @@ public class lightGrunt : enemyClass
 
     protected void follow()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
+        if(Vector2.Distance(transform.position, player.transform.position) > 10)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
+        }
 
         transform.rotation = utilitiesDB.LookAt2D(player.transform.position - transform.position);
     }
 
     private void OnDestroy()
     {
-        spawnManager.lightGruntAmount--;
+        spawnManager.rangedGruntAmount--;
     }
 }

@@ -66,7 +66,10 @@ public class scythe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        var x = other.GetComponent<IDamageable>();
-        toDamage.Add(x);
+        if (other.TryGetComponent<IDamageable>(out IDamageable))
+        {
+            var x = other.GetComponent<IDamageable>();
+            toDamage.Add(x);
+        }
     }
 }
