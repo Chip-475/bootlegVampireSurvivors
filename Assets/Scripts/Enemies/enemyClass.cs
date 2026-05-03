@@ -6,7 +6,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     [Header("Meta Data")]
 
     IDamageable IDamageable;
-    protected GameObject player;
+    public GameObject player;
     protected Rigidbody2D rb;
     protected Collider2D _collider;
 
@@ -14,9 +14,9 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected bool detecting;
 
     [Header("Stats")]
-    [SerializeField] protected float hp;
+    [SerializeField] public float hp;
     protected float hpMax;
-    [SerializeField] protected float atk;
+    [SerializeField] public float atk;
     [SerializeField] protected float spd;
 
     public float fovRange;
