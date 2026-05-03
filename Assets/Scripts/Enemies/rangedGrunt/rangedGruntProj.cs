@@ -32,8 +32,7 @@ public class rangedGruntProj : MonoBehaviour
         {
             if (other.TryGetComponent<IDamageable>(out IDamageable))
             {
-                var x = other.GetComponent<IDamageable>();
-                x.damage(atk);
+                other.GetComponent<IDamageable>().damage(atk);
             }
             Destroy(gameObject);
         }

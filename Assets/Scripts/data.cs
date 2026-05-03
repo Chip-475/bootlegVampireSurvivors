@@ -4,8 +4,13 @@ using UnityEngine.Rendering;
 
 public class data : MonoBehaviour
 {
+    // Misc
     public static bool isPaused;
-   public static int nemiciuccisi=0;
-   public static int cardCount=0;
-   public static int crescita1,crescita2;
+
+    // Misc Stats
+    public static int level;
+    public static float exp;
+
+    // Counters
+    public static int killCount=0;
 }

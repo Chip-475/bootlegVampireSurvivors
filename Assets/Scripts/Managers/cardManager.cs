@@ -1,38 +1,35 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class cardManager : MonoBehaviour
 {
-   public GameObject[] cards;
-   public int killnecessarie;
+    List<GameObject> cards = new List<GameObject>();
+    List<int> cardIndexes = new List<int>();
 
     void Start()
     {
-    data.nemiciuccisi = Mathf.RoundToInt(20 +data.crescita1 * data.cardCount + data.crescita2 * Mathf.Pow(data.cardCount, 1.45f));
-
+        for(int i = 0; i < cards.Count; i++)
+        {
+            cardIndexes.Add(i);
+        }
     }
 
     void Update()
     {
-        if (data.nemiciuccisi >= killnecessarie)
-        {
-            data.nemiciuccisi = 0; 
-            killnecessarie = Mathf.RoundToInt(20 + data.crescita1 * data.cardCount + data.crescita2 * Mathf.Pow(data.cardCount, 1.45f));
-            pickCard();
-        }
+
     }
+
     void pickCard()
     {
-        int randomIndex = 0;
-       int randomIndex2 = 0;
-       int randomIndex3 = 0;
-        while(randomIndex == randomIndex2 || randomIndex == randomIndex3 || randomIndex2 == randomIndex3)
+        int[] toSpawn = new int[3];
+        for(int i = 0; i < 3; i++)
         {
-            randomIndex = Random.Range(0, cards.Length);
-            randomIndex2 = Random.Range(0, cards.Length);
-            randomIndex3 = Random.Range(0, cards.Length);
-        GameObject randomCard1 = cards[randomIndex];    
-        GameObject randomCard2 = cards[randomIndex];
-        GameObject randomCard3 = cards[randomIndex];
+            var x = Random.Range(0, cardIndexes.Count);
+            toSpawn[i] = x;
+            cardIndexes.Remove(x);
         }
+
+        // Card spawn to code
     }
 }
