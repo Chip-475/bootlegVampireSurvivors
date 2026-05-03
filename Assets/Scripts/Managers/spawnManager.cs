@@ -11,5 +11,4 @@ public class spawnManager : MonoBehaviour
     public static int rangedGruntAmount;
     public int rangedGruntMaxAmount;
     public static int throwerGruntAmount;
-    public int throwerGruntMaxAmount;
 }

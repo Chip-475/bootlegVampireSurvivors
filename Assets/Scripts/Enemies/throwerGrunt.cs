@@ -2,74 +2,55 @@ using UnityEngine;
 
 public class throwerGrunt : enemyClass
 {
-    [Header("Thrower")]
-    [SerializeField] private GameObject projectilePrefab;
-    [SerializeField] private Transform shootPoint;
-    [SerializeField] private float preferredDistance = 8f;
-    [SerializeField] private float retreatDistance = 5f;
-    [SerializeField] private float shootCooldown = 2f;
-    [SerializeField] private float projectileSpeed = 9f;
-    [SerializeField] private float projectileLifetime = 5f;
-
-    private float shootTimer;
-
+    public GameObject projectile;
+    public Transform shootPoint;
+    public float shootCD;
+    private float sinceShoot;
+    private bool canShoot;
     private new void Start()
     {
         base.Start();
+        canShoot = false;
+        sinceShoot = shootCD;
 
         spawnManager.throwerGruntAmount++;
-        shootTimer = shootCooldown;
     }
-
     private new void FixedUpdate()
     {
         base.FixedUpdate();
-
-        keepDistance();
-        aimAtPlayer();
-        handleShooting();
+        follow();
+        if (canShoot && sinceShoot >= shootCD) shoot();
+        sinceShoot += Time.deltaTime;
     }
 
-    private void keepDistance()
+    protected void follow()
     {
-        float distance = Vector2.Distance(transform.position, player.transform.position);
-
-        if (distance > preferredDistance)
+        if (Vector2.Distance(transform.position, player.transform.position) > fovRange)
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
+            canShoot = false;
         }
-        else if (distance < retreatDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, -spd * Time.deltaTime);
-        }
-    }
+        else canShoot = true;
 
-    private void aimAtPlayer()
-    {
         transform.rotation = utilitiesDB.LookAt2D(player.transform.position - transform.position);
     }
-
-    private void handleShooting()
+    public void shoot()
     {
-        shootTimer -= Time.deltaTime;
-        if (shootTimer > 0f) return;
-
-        shootTimer = shootCooldown;
-        shoot();
+        Instantiate(projectile, shootPoint.position, Quaternion.identity, transform);
+        sinceShoot = 0;
     }
 
-    private void shoot()
+    private void OTriggerEnter2D(Collider2D other)
     {
-        if (projectilePrefab == null) return;
-
-        Transform spawnPoint = shootPoint != null ? shootPoint : transform;
-        GameObject projectileObject = Instantiate(projectilePrefab, spawnPoint.position, transform.rotation);
-
-        if (projectileObject.TryGetComponent<throwerProjectile>(out throwerProjectile projectile))
+        if ((!(other.gameObject.tag == "Obstacle")) || ((other.gameObject.tag == "Player"))) 
         {
-            Vector2 direction = (player.transform.position - spawnPoint.position).normalized;
-            projectile.Init(direction, projectileSpeed, atk, projectileLifetime);
+            if (other.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.damage(atk);
+            }
+            Destroy(gameObject);
         }
+
     }
 
     private void OnDestroy()

@@ -6,9 +6,8 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     [Header("Meta Data")]
 
     IDamageable IDamageable;
-    public GameObject playerObj;
-    public player player;
-    protected Rigidbody2D prb;
+    public GameObject player;
+    protected Rigidbody2D rb;
     protected Collider2D _collider;
 
     protected bool inRange;
@@ -17,55 +16,49 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     [Header("Stats")]
     [SerializeField] public float hp;
     protected float hpMax;
-    public float xpGiven;
     [SerializeField] public float atk;
     [SerializeField] protected float spd;
 
     public float fovRange;
     [Range(0, 360)] public float fovAngle;
 
-
-    // Virtuals
     protected virtual void Start()
     {
-        playerObj = GameObject.FindGameObjectWithTag("Player");
-        player = playerObj.GetComponent<player>();
-        prb = playerObj.GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        rb = player.GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
 
         hpMax = hp;
     }
     protected virtual void FixedUpdate()
     {
-        
-    }
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag != "Player") return;
 
-        var x = collision.gameObject.GetComponent<IDamageable>();
-        x.damage(hp);
-        Destroy(gameObject);
-    }
-    protected virtual void OnDestroy()
-    {
-        data.killCount++;
-        player.onKill(xpGiven);
     }
 
-
-    // Misc
     protected void onDamaged(float damage)
     {
         hp -= damage;
         Mathf.Clamp(hp, 0, hpMax);
-        if (hp == 0) { Destroy(gameObject); return; }
+        if (hp == 0) 
+        {
+            data.killCount++;
+            Destroy(gameObject);
+        }
     }
+
     //protected void detect()
     //{
     //    // To do
     //}
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != "Player") return;
+
+        var x = collision.gameObject.GetComponent<IDamageable>();
+        x.damage(atk);
+        Destroy(gameObject);
+    }
 
     // Interface Methods
     public void damage(float damage)
