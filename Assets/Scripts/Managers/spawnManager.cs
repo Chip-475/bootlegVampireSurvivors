@@ -10,4 +10,6 @@ public class spawnManager : MonoBehaviour
     public int heavyGruntMaxAmount;
     public static int rangedGruntAmount;
     public int rangedGruntMaxAmount;
+    public static int throwerGruntAmount;
+    public int throwerGruntMaxAmount;
 }
