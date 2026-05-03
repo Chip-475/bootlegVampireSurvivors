@@ -1,5 +1,7 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour, IDamageable
 {
@@ -14,6 +16,11 @@ public class player : MonoBehaviour, IDamageable
 
     public Vector3 mousePosition;
     public Vector3 mouseWorldPosition;
+
+    [Header("HP Bar")]
+    public Image hpBarSprite;
+    public AnimationCurve hpBarCurve;
+    public float animTime;
 
     [Header("Stats")]
     public float hp;
@@ -66,11 +73,25 @@ public class player : MonoBehaviour, IDamageable
         gameManager.togglePause();
     }
 
+    // Couroutines
+    IEnumerator hpBarMovement()
+    {
+        var x = 0f;
+        while(x < animTime)
+        {
+            hpBarSprite.fillAmount = hpBarCurve.Evaluate(x);
+            x += Time.deltaTime;
+            yield return null;
+        }
+    }
+
     // Player Misc
     public void onDamaged(float damage)
     {
+        hpBarCurve = AnimationCurve.EaseInOut(0, (hp) / 100, animTime, (hp - damage) / 100);
         hp -= damage;
         Mathf.Clamp(hp, 0, hpMax);
+        StartCoroutine(hpBarMovement());
         if (hp == 0) Destroy(gameObject);
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
     }
