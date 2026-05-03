@@ -39,7 +39,11 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     {
         hp -= damage;
         Mathf.Clamp(hp, 0, hpMax);
-        if (hp == 0) Destroy(gameObject);
+        if (hp == 0) 
+        {
+            data.nemiciuccisi++;
+            Destroy(gameObject);
+        }
     }
 
     //protected void detect()
