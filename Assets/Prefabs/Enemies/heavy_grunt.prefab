@@ -106,8 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504e83e9c5cb9af4fa05c95e3b21e754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::heavyGrunt
+  playerObj: {fileID: 0}
   player: {fileID: 0}
   hp: 50
+  xpGiven: 20
   atk: 10
   spd: 1
   fovRange: 5

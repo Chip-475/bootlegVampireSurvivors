@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class rangedGrunt : enemyClass
@@ -25,13 +26,13 @@ public class rangedGrunt : enemyClass
 
     protected void follow()
     {
-        if(Vector2.Distance(transform.position, player.transform.position) > fovRange)
+        if(Vector2.Distance(transform.position, playerObj.transform.position) > fovRange)
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, spd * Time.deltaTime);
             canShoot = false;
         }else canShoot = true;
 
-        transform.rotation = utilitiesDB.LookAt2D(player.transform.position - transform.position);
+        transform.rotation = utilitiesDB.LookAt2D(playerObj.transform.position - transform.position);
     }
     public void shoot()
     {
@@ -39,8 +40,13 @@ public class rangedGrunt : enemyClass
         sinceShoot = 0;
     }
 
-    private void OnDestroy()
+    private new void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D (collision);
+    }
+    private new void OnDestroy()
+    {
+        base.OnDestroy();
         spawnManager.rangedGruntAmount--;
     }
 }

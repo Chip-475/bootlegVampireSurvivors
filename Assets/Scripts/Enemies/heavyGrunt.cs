@@ -16,13 +16,18 @@ public class heavyGrunt : enemyClass
 
     protected void follow()
     {
-        transform.position = Vector2.MoveTowards(transform.position, player.transform.position, spd * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, spd * Time.deltaTime);
 
-        transform.rotation = utilitiesDB.LookAt2D(player.transform.position - transform.position);
+        transform.rotation = utilitiesDB.LookAt2D(playerObj.transform.position - transform.position);
     }
 
-    private void OnDestroy()
+    private new void OnCollisionEnter2D(Collision2D collision)
     {
+        base.OnCollisionEnter2D(collision);
+    }
+    private new void OnDestroy()
+    {
+        base.OnDestroy();
         spawnManager.heavyGruntAmount--;
     }
 }

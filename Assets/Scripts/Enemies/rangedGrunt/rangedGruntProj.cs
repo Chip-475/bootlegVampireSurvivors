@@ -18,7 +18,7 @@ public class rangedGruntProj : MonoBehaviour
         self = GetComponent<Rigidbody2D>();
         parent = transform.parent.GetComponent<rangedGrunt>();
 
-        dir = ((Vector2)(parent.player.transform.position) - self.position).normalized;
+        dir = ((Vector2)(parent.playerObj.transform.position) - self.position).normalized;
         atk = parent.atk;
 
         transform.SetParent(null, true);

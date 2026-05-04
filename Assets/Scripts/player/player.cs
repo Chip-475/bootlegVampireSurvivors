@@ -7,20 +7,20 @@ public class player : MonoBehaviour, IDamageable
 {
     [Header("Misc")]
     public Rigidbody2D rb;
+    public SpriteRenderer sr;
+
     public GameObject scytheTrf;
     public scythe scythe;
 
     public gameManager gameManager;
+    public hpBar hpBar;
+    public xpBar xpBar;
 
+    public bool isDead;
     public bool canAttack = true;
 
     public Vector3 mousePosition;
     public Vector3 mouseWorldPosition;
-
-    [Header("HP Bar")]
-    public Image hpBarSprite;
-    public AnimationCurve hpBarCurve;
-    public float animTime;
 
     [Header("Stats")]
     public float hp;
@@ -34,8 +34,13 @@ public class player : MonoBehaviour, IDamageable
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+
         scythe = GetComponentInChildren<scythe>();
         scytheTrf.SetActive(true);
+
+        hpBar = GetComponent<hpBar>();
+        xpBar = GetComponent<xpBar>();
     }
     void FixedUpdate()
     {
@@ -56,44 +61,42 @@ public class player : MonoBehaviour, IDamageable
     // Player Controls
     public void move(InputAction.CallbackContext context)
     {
-        if(data.isPaused) return;
+        if(data.isPaused || isDead == true) return;
 
         moveInput = context.ReadValue<Vector2>();
     }
     public void attack(InputAction.CallbackContext context)
     {
-        if (!context.performed || !canAttack || data.isPaused) return;
+        if (!context.performed || !canAttack || data.isPaused || isDead == true) return;
 
         StartCoroutine(scythe.swing());
     }
     public void togglePause(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
+        if (!context.performed || isDead == true) return;
 
         gameManager.togglePause();
     }
 
     // Couroutines
-    IEnumerator hpBarMovement()
-    {
-        var x = 0f;
-        while(x < animTime)
-        {
-            hpBarSprite.fillAmount = hpBarCurve.Evaluate(x);
-            x += Time.deltaTime;
-            yield return null;
-        }
-    }
+    
 
     // Player Misc
     public void onDamaged(float damage)
     {
-        hpBarCurve = AnimationCurve.EaseInOut(0, (hp) / 100, animTime, (hp - damage) / 100);
+        hpBar.hpBarCurve = AnimationCurve.EaseInOut(0, hp / 100f, hpBar.animTime, (hp - damage) / 100f);
         hp -= damage;
         Mathf.Clamp(hp, 0, hpMax);
-        StartCoroutine(hpBarMovement());
-        if (hp == 0) Destroy(gameObject);
+        StartCoroutine(hpBar.hpBarMovement());
+        if (hp == 0) { sr.enabled = false; isDead = true; }
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
+    }
+    public void onKill(float toGain)
+    {
+        data.xp += toGain;
+        xpBar.xpBarCurve = AnimationCurve.EaseInOut(0, (data.xp - toGain) / 100f, xpBar.animTime, data.xp / 100f);
+        StartCoroutine(xpBar.xpBarMovement());
+        print("onKill");
     }
 
     // Interface Methods

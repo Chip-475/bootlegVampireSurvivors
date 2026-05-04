@@ -106,7 +106,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed35013f20e0884ca64f1d2e85481a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::lightGrunt
-  hp: 20
+  playerObj: {fileID: 0}
+  player: {fileID: 0}
+  hp: 10
+  xpGiven: 10
   atk: 5
   spd: 3
   fovRange: 5
