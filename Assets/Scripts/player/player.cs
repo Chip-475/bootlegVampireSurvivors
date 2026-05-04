@@ -91,13 +91,17 @@ public class player : MonoBehaviour, IDamageable
         if (hp == 0) { sr.enabled = false; isDead = true; }
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
     }
-    public void onKill(float toGain)
-    {
-        data.xp += toGain;
-        xpBar.xpBarCurve = AnimationCurve.EaseInOut(0, (data.xp - toGain) / 100f, xpBar.animTime, data.xp / 100f);
-        StartCoroutine(xpBar.xpBarMovement());
-        print("onKill");
-    }
+    //public void onKill(float toGain)
+    //{
+    //    data.xp += data.xpQueue.Dequeue();
+    //    if(data.xp >= data.xpMax)
+    //    {
+    //        data.xp -= data.xpMax;
+    //        data.level++;
+    //    }
+    //    xpBar.xpBarCurve = AnimationCurve.EaseInOut(0, (data.xp - toGain) / 100f, xpBar.animTime, data.xp / 100f);
+    //    StartCoroutine(xpBar.xpBarMovement());
+    //}
 
     // Interface Methods
     public void damage(float damage)

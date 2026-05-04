@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class hpBar : MonoBehaviour
+public class hpBar : MonoBehaviour // ATTACHED TO PLAYER
 {
     [Header("HP Bar")]
     public Image hpBarObject;

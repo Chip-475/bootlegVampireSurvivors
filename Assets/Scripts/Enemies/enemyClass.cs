@@ -8,6 +8,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     IDamageable IDamageable;
     public GameObject playerObj;
     public player player;
+    public xpBar xpBar;
     protected Rigidbody2D prb;
     protected Collider2D _collider;
 
@@ -30,6 +31,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     {
         playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj.GetComponent<player>();
+        xpBar = playerObj.GetComponent<xpBar>();
         prb = playerObj.GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
 
@@ -43,14 +45,17 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     {
         if (collision.gameObject.tag != "Player") return;
 
-        var x = collision.gameObject.GetComponent<IDamageable>();
-        x.damage(hp);
+        if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable))
+        {
+            collision.gameObject.GetComponent<IDamageable>().damage(atk);
+        }
         Destroy(gameObject);
     }
     protected virtual void OnDestroy()
     {
         data.killCount++;
-        player.onKill(xpGiven);
+        data.xpQueue.Enqueue(xpGiven);
+        if (!xpBar.queueing) xpBar.startMedium();
     }
 
 
@@ -58,7 +63,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected void onDamaged(float damage)
     {
         hp -= damage;
-        Mathf.Clamp(hp, 0, hpMax);
+        hp = Mathf.Clamp(hp, 0, hpMax);
         if (hp == 0) { Destroy(gameObject); return; }
     }
     //protected void detect()
