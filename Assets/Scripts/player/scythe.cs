@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class scythe : MonoBehaviour
@@ -61,6 +63,7 @@ public class scythe : MonoBehaviour
         sr.enabled = false;
         transform.localEulerAngles = new Vector3(0, 0, 45);
 
+
         player.canAttack = true;
     }
 
@@ -72,4 +75,5 @@ public class scythe : MonoBehaviour
             toDamage.Add(x);
         }
     }
+
 }

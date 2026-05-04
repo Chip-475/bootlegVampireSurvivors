@@ -56,6 +56,10 @@ public class player : MonoBehaviour, IDamageable
 
         // Player Movement
         rb.linearVelocity = moveInput * spd;
+         //<3| >--------<| <3
+        {
+            
+        }
     }
 
     // Player Controls
