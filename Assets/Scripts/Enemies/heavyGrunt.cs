@@ -13,8 +13,8 @@ public class heavyGrunt : enemyClass
         base.FixedUpdate();
         follow();
     }
-
-    protected void follow()
+    // //  //<3| >--------<| <3
+        protected void follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, spd * Time.deltaTime);
 

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class rangedGruntProj : MonoBehaviour
+public class shootThrowerGrunt : MonoBehaviour
 {
     IDamageable IDamageable;
 
@@ -24,9 +24,8 @@ public class rangedGruntProj : MonoBehaviour
         transform.SetParent(null, true);
 
         self.linearVelocity = new Vector2(spd * dir.x, spd * dir.y);
-    }
-
-     private void OTriggerEnter2D(Collider2D other)
+      //  //<3| >--------<| <3
+          }     private void OTriggerEnter2D(Collider2D other)
     {
         if ((!(other.gameObject.tag == "Obstacle")) || ((other.gameObject.tag == "Player"))) 
         {
