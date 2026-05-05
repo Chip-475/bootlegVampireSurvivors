@@ -1,0 +1,25 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class utilitiesDB : MonoBehaviour
+{
+    // Rotates towards a position
+    public static Quaternion LookAt2D(Vector2 forward)
+    { 
+        return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
+    }
+
+    // Calculates percentage
+    public static float percentage(float percentageOf, float number)
+    {
+        return (percentageOf/100) * number;
+    }
+
+    // Loads scene toLoad
+    public string toLoad;
+    public async void loadFunc()
+    {
+        await SceneManager.LoadSceneAsync("loadingScreen", LoadSceneMode.Single);
+        await SceneManager.LoadSceneAsync(toLoad, LoadSceneMode.Single);
+    }
+}
