@@ -2,15 +2,29 @@ using UnityEngine;
 
 public class increasedLifelvl2 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public player pg;
+    public float lifeMult = 1.25f;
+    private bool used = false;
+
     void Start()
     {
-        
+       
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
+
+    public void useCard()
+    {
+        if(used == true) return;
+        if(pg == null) return;
+
+        pg.hp=pg.hp*lifeMult;
+
+        used = true;
+        Destroy(gameObject);
+    }
+
 }

@@ -21,5 +21,7 @@ public class utilitiesDB : MonoBehaviour
     {
         await SceneManager.LoadSceneAsync("loadingScreen", LoadSceneMode.Single);
         await SceneManager.LoadSceneAsync(toLoad, LoadSceneMode.Single);
+     
+     
     }
 }

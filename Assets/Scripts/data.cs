@@ -10,7 +10,6 @@ public class data : MonoBehaviour
     // Misc Stats
     public static int level;
     public static float exp;
-
     // Counters
     public static int killCount=0;
 }
