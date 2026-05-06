@@ -10,10 +10,10 @@ public class electroBoots : MonoBehaviour
     {
         enemyClass en = other.GetComponent<enemyClass>();
         if (en == null) return;
-        timer += Time.deltaTime;
+        timer+=Time.deltaTime;
         if(timer>=tick)
         {
-            en.onDamaged(danno);
+            en.onDamaged(danno);  //classe abstract o static o non abstract
             timer=0;
         }
     }
