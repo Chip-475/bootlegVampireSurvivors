@@ -12857,6 +12857,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf911946f7b31349b2b5107f648d77f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::player
+  rb: {fileID: 0}
+  sr: {fileID: 0}
+  scytheTrf: {fileID: 0}
+  scythe: {fileID: 0}
+  gameManager: {fileID: 0}
+  hpBar: {fileID: 0}
+  xpBar: {fileID: 0}
+  isDead: 0
+  canAttack: 1
+  mousePosition: {x: 0, y: 0, z: 0}
+  mouseWorldPosition: {x: 0, y: 0, z: 0}
+  hp: 0
+  atk: 0
+  spd: 0
+  aspd: 0
 --- !u!50 &621900518
 Rigidbody2D:
   serializedVersion: 5
@@ -15353,6 +15368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026ac483c7ef43c4ba3a91292c53be63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::scythe
+  player: {fileID: 0}
+  sr: {fileID: 0}
+  bc: {fileID: 0}
+  curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!61 &1806906696
 BoxCollider2D:
   m_ObjectHideFlags: 0

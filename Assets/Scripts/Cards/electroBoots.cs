@@ -1,8 +1,7 @@
 using UnityEngine;
 
 public class electroBoots : MonoBehaviour
-{
-   
+{ 
     void Start()
     {
         
