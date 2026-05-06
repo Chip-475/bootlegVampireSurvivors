@@ -30,8 +30,8 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        //EnsureSliderReferences(); // controlla se gli slider sono assegnati se no l cerca per nome nella scena
-        //SyncSlidersWithSavedValues(); // imposta i valori salvati 
+        rife(); // controlla se gli slider sono assegnati se no l cerca per nome nella scena
+        valoriSalvati(); // imposta i valori salvati 
         volume(100,"master");
         volume(100,"sfx");
         volume(100,"music");
@@ -62,7 +62,18 @@ public class AudioManager : MonoBehaviour
 
     public void setMaster(float vol)
     {
+        //assseganre il volume con quella statica
+        volume(vol,"master");
+    }
 
+    public void setSfx(float vol)
+    {
+        volume(vol,"sfx");
+    }
+
+    public void setMusic(float vol)
+    {
+        volume(vol,"music");
     }
 
     private void volume(float vol,string funz)
@@ -78,17 +89,23 @@ public class AudioManager : MonoBehaviour
             GameObject ob=GameObject.Find("master");
             if(ob!=null)masterSlider=ob.GetComponent<Slider>();
         }
-        if(sfxSlider==null)
+        if(prefabSlider==null)
         {
             GameObject ob=GameObject.Find("sfx");
             if (ob != null) prefabSlider=ob.GetComponent<Slider>();
         }
-        if(bckSlider==null)
+        if (bckSlider == null)
         {
-            GameObject ob=GameObject.Find("music");
-            if(ob!=null)bckSlider=ob.GetComponent<Slider>();
+            GameObject ob = GameObject.Find("music");
+            if (ob != null) bckSlider = ob.GetComponent<Slider>();
         }
+    }
 
-
+    private void valoriSalvati()
+    {
+        //quando ci sara il file con i dati fissi
+        if(masterSlider!=null) masterSlider.SetValueWithoutNotify(50f);
+        if(prefabSlider!=null) prefabSlider.SetValueWithoutNotify(50f);
+        if (bckSlider != null) bckSlider.SetValueWithoutNotify(50f);
     }
 }
