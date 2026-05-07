@@ -11,7 +11,7 @@ public class player : MonoBehaviour, IDamageable
 
     public GameObject scytheTrf;
     public scythe scythe;
-
+    
     public gameManager gameManager;
     public hpBar hpBar;
     public xpBar xpBar;

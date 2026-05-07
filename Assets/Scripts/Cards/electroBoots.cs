@@ -1,24 +1,49 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 public class electroBoots : MonoBehaviour
 {
-    [SerializeField]private float danno;
-    private float tick = 0.5f;
-    private float timer = 0;
-
-    void OnTriggerStay2D(Collider2D other)
+    [SerializeField]private float _danno;
+    private bool equip;
+    bool dentro;
+    List<GameObject> enemy=new List<GameObject>();
+    public float cooldown = 0.5f;
+    IDamageable IDamageable;
+    void OnTriggerEnter2D(Collider2D other)
     {
-        enemyClass en = other.GetComponent<enemyClass>();
-        if (en == null) return;
-        timer+=Time.deltaTime;
-        if(timer>=tick)
+        dentro = true;
+        enemy.Add(other.gameObject);
+    }
+
+    IEnumerator danno()
+    {
+        float tick = 0f;
+        while(dentro==true)
         {
-            en.onDamaged(danno);  //classe abstract o static o non abstract
-            timer=0;
+            if(tick>cooldown)
+            {
+                foreach (var en in enemy)
+                {
+                    if (en.TryGetComponent<IDamageable>(out IDamageable)) // restitusce true  o false se ce o non il componente
+                    {
+                        en.GetComponent<IDamageable>().damage(_danno); //chiama il metodo di interfaccia
+                    }
+                }
+                tick=0f;
+            }
+            tick += Time.deltaTime;
+            yield return null; //aspetta un frame
         }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
-        timer = 0f;
+        dentro = false;
+        enemy.Remove(other.gameObject);
+    }
+
+    private void setEquip()
+    {
+        equip=true;
     }
 }
