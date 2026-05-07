@@ -14,11 +14,10 @@ public class lightGrunt : enemyClass
         follow();
     }
 
-    protected void follow()
+    public void follow()
     {
         transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, spd * Time.deltaTime);
-
-        transform.rotation = utilitiesDB.LookAt2D(playerObj.transform.position - transform.position);
+        transform.rotation = utilitiesDB.LookAt2D(transform.position - playerObj.transform.position);
     }
 
     private new void OnCollisionEnter2D(Collision2D collision)

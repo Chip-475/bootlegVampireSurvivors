@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::heavyGrunt
   playerObj: {fileID: 0}
   player: {fileID: 0}
-  hp: 50
+  xpBar: {fileID: 0}
+  hp: 25
   xpGiven: 20
   atk: 10
   spd: 1
