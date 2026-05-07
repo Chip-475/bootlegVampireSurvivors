@@ -13,8 +13,6 @@ public class player : MonoBehaviour, IDamageable
     public GameObject scytheTrf;
     public scythe scythe;
 
-    public GameObject fireArea;
-
     public gameManager gameManager;
     public hpBar hpBar;
     public xpBar xpBar;
@@ -37,7 +35,6 @@ public class player : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        self = GetComponent<GameObject>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -102,7 +99,7 @@ public class player : MonoBehaviour, IDamageable
         while (true)
         {
             yield return new WaitForSeconds(10);
-            if (data.fireArea) Instantiate(fireArea, transform.position, Quaternion.identity);
+            //if (data.fireArea) Instantiate(data.fireArea, transform.position, Quaternion.identity);
         }
     }
 

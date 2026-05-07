@@ -14,7 +14,6 @@ public class electroAura : cardClass
         lvl++;
 
         transform.localScale = new Vector3(radius * 2, radius * 2, 0);
-
         StartCoroutine(damage());
     }
 
