@@ -12819,11 +12819,13 @@ MonoBehaviour:
   sr: {fileID: 0}
   scytheTrf: {fileID: 1806906692}
   scythe: {fileID: 1806906695}
+  fireArea: {fileID: 4154639322218962058, guid: 4f782c418422bfe428e07a8f7de8fe9c, type: 3}
   gameManager: {fileID: 1617267569}
   hpBar: {fileID: 0}
   xpBar: {fileID: 0}
   isDead: 0
   canAttack: 1
+  canLaunch: 1
   mousePosition: {x: 0, y: 0, z: 0}
   mouseWorldPosition: {x: 0, y: 0, z: 0}
   hp: 100

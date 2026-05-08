@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class lamaRotantelvl1 : MonoBehaviour
+public class orbitingBlades : MonoBehaviour
 {
     
     void Start()
