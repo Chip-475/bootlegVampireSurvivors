@@ -17,13 +17,25 @@ public class scythe : MonoBehaviour
     {
         public float damagePerTick;
         public float duration;
-    }
+    }   
 
     [Header("Livelli")]
     public livelloFuoco level1;
     public livelloFuoco level2;
     public livelloFuoco level3;
     public float interval;
+
+
+    [System.Serializable]
+    public struct livelloDanno
+    {
+        public float incremento;
+    }
+
+    [Header("livelli")]
+    public livelloDanno lvl1 = new livelloDanno { incremento = 5f };
+    public livelloDanno lvl2 = new livelloDanno { incremento = 10f };
+    public livelloDanno lvl3 = new livelloDanno { incremento = 15f };
 
     void Start()
     {
@@ -105,5 +117,32 @@ public class scythe : MonoBehaviour
                 fire.Initialize(tar,selezionato.damagePerTick,selezionato.duration, interval);   
             }
         }
+    }
+
+    public void applicaDanno()
+    {
+        float dannoExtra = 0;
+        switch (livelloDanno)
+        {
+            case 1:
+                dannoExtra = lvl1.incremento;
+                break;
+            case 2:
+                dannoExtra = lvl2.incremento;
+                break;
+            case 3:
+                dannoExtra = lvl3.incremento;
+                break;
+        }
+        float dannoTotale = player.atk + dannoExtra;
+        foreach (IDamageable t in toDamage)
+        {
+            t.damage(dannoTotale);
+        }
+    }
+
+    public saliLivello()
+    {
+
     }
 }
