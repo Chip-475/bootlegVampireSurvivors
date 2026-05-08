@@ -1,16 +1,10 @@
 using UnityEngine;
-
+using System.Collections;
 public class haste : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void attacoVeloce(player p,float velocita)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        p.aspd /= velocita;  //decremento la velocita permanente
+        Destroy(this); //nonn serve piu e si distrugge
     }
 }

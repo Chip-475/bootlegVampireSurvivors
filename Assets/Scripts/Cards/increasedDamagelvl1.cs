@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class increasedDamagelvl1 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void effetto(player p,float extraDamage)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        p.atk += extraDamage;  //per lo stesso motivo di haste
+        Destroy(this);
     }
 }

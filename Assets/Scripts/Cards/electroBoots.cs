@@ -31,7 +31,7 @@ public class electroBoots : MonoBehaviour
                 }
                 tick=0f;
             }
-            tick += Time.deltaTime;
+            tick+=Time.deltaTime;   
             yield return null; //aspetta un frame
         }
     }

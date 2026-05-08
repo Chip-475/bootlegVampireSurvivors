@@ -1,16 +1,26 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 public class fireDamagelvl1 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private IDamageable nemico;
+
+    public void Initialize(IDamageable _nemico,float damage,float duration,float inter)
     {
-        
+        nemico = _nemico;  
+        StartCoroutine(fireDamage(damage, duration, inter));
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator fireDamage(float _damage,float duration,float inter)
     {
-        
+        //questo per il tempo giusto e dare il danno giusto,dal nemico che gli passa scythe
+        float trascorso=0f;    
+        while(trascorso<duration)
+        {
+            if(nemico!=null)nemico.damage(_damage);
+            trascorso += inter;
+            yield return new WaitForSeconds(inter);
+        }
+        Destroy(this);
     }
 }
