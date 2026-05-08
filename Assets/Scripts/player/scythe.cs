@@ -11,7 +11,20 @@ public class scythe : MonoBehaviour
     public SpriteRenderer sr;
     public BoxCollider2D bc;
     public AnimationCurve curve;
-    
+
+    [System.Serializable]
+    public struct livelloFuoco
+    {
+        public float damagePerTick;
+        public float duration;
+    }
+
+    [Header("Livelli")]
+    public livelloFuoco level1;
+    public livelloFuoco level2;
+    public livelloFuoco level3;
+    public float interval;
+
     void Start()
     {
         player = GetComponentInParent<player>();
@@ -68,6 +81,35 @@ public class scythe : MonoBehaviour
                 dot.damage = (player.atk * 0.2f) * data.fireAspectLvl;
                 dot.duration = 3;
                 dot.tick = 0.5f;
+            }
+        }
+    }
+
+    public void applicaFuoco(int livello)
+    {
+        livelloFuoco selezionato;
+        switch(livello)
+        {
+            case 1:
+                selezionato = level1;
+                break;
+            case 2:
+                selezionato = level2;
+                break;
+            case 3:
+                selezionato = level3;
+                break;
+            default:
+                selezionato = level1;
+                break;
+        }
+        foreach(IDamageable tar in toDamage)
+        {
+            if(tar is MonoBehaviour)
+            {
+                MonoBehaviour target = (MonoBehaviour)tar;
+                fireDamagelvl1 fire = target.gameObject.AddComponent<fireDamagelvl1>();
+                fire.Initialize(tar,selezionato.damagePerTick,selezionato.duration, interval);   
             }
         }
     }
