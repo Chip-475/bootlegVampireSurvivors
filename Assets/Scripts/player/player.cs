@@ -33,6 +33,11 @@ public class player : MonoBehaviour, IDamageable
 
     private Vector2 moveInput;
 
+    public void setHpMax(float v)
+    {
+        hpMax+=v;
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();

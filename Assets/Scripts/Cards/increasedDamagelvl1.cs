@@ -7,7 +7,7 @@ public class increasedDamagelvl1 : MonoBehaviour
         scythe s = other.GetComponentInChildren<scythe>();
         if(s!= null )
         {
-            s.saliDanno();
+            s.saliLivello();
             Destroy(gameObject);
         }
     }

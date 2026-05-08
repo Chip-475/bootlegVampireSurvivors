@@ -37,6 +37,8 @@ public class scythe : MonoBehaviour
     public livelloDanno lvl2 = new livelloDanno { incremento = 10f };
     public livelloDanno lvl3 = new livelloDanno { incremento = 15f };
 
+    public int lvlDanno=1;
+
     void Start()
     {
         player = GetComponentInParent<player>();
@@ -84,17 +86,17 @@ public class scythe : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<IDamageable>(out IDamageable))
+        if (other.TryGetComponent<IDamageable>(out var target))
         {
-            other.GetComponent<IDamageable>().damage(player.atk);
-            if(data.fireAspectLvl > 0)
-            {
-                var dot = other.gameObject.AddComponent<DoT>();
-                dot.damage = (player.atk * 0.2f) * data.fireAspectLvl;
-                dot.duration = 3;
-                dot.tick = 0.5f;
-            }
+            if (!toDamage.Contains(target)) toDamage.Add(target);  // per effetti fuoco e danno extra
+            //other.GetComponent<IDamageable>().damage(player.atk);
+            target.damage(player.atk); //danno subito allo swing
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)  // per se in caso si allotanano dal raggio di azione
+    {
+        if (other.TryGetComponent<IDamageable>(out var target)) toDamage.Remove(target);
     }
 
     public void applicaFuoco(int livello)
@@ -121,7 +123,8 @@ public class scythe : MonoBehaviour
             {
                 MonoBehaviour target = (MonoBehaviour)tar;
                 fireDamagelvl1 fire = target.gameObject.AddComponent<fireDamagelvl1>();
-                fire.Initialize(tar,selezionato.damagePerTick,selezionato.duration, interval);   
+                fire.Initialize(tar,selezionato.damagePerTick,selezionato.duration, interval);
+                Debug.Log("successo");
             }
         }
     }
@@ -129,7 +132,7 @@ public class scythe : MonoBehaviour
     public void applicaDanno()
     {
         float dannoExtra = 0;
-        switch (livelloDanno)
+        switch (lvlDanno)
         {
             case 1:
                 dannoExtra = lvl1.incremento;
@@ -148,8 +151,8 @@ public class scythe : MonoBehaviour
         }
     }
 
-    public saliLivello()
+    public void saliLivello()
     {
-
+        if(lvlDanno<3)lvlDanno++;
     }
 }
