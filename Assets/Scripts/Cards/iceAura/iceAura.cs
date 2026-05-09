@@ -12,16 +12,10 @@ public class iceAura : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            collision.GetComponent<enemyClass>().spd *= 0.5f;
-        }
+        if (collision.CompareTag("Enemy")) collision.GetComponent<enemyClass>().spd *= 0.5f;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
-        {
-            collision.GetComponent<enemyClass>().spd *= 2;
-        }
+        if (collision.CompareTag("Enemy")) collision.GetComponent<enemyClass>().spd *= 2;
     }
 }
