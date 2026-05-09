@@ -62,6 +62,13 @@ public class scythe : MonoBehaviour
         if (other.TryGetComponent<IDamageable>(out IDamageable))
         {
             other.GetComponent<IDamageable>().damage(player.atk);
+            if(data.fireAspectLvl > 0)
+            {
+                var dot = other.gameObject.AddComponent<DoT>();
+                dot.damage = (player.atk * 0.2f) * data.fireAspectLvl;
+                dot.duration = 3;
+                dot.tick = 0.5f;
+            }
         }
     }
 }

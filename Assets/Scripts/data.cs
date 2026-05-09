@@ -13,9 +13,9 @@ public class data : MonoBehaviour
     public static float xpMax = 100;
 
     // Cards
-    public static bool electroBoots;
+    public static bool electroAura;
     public static bool iceAura;
-    public static bool fireDamage;
+    public static int fireAspectLvl;
     public static bool fireArea;
     public static bool moveSpeed;
     public static bool orbitingBlades;

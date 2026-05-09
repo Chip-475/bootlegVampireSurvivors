@@ -21,7 +21,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected float hpMax;
     public float xpGiven;
     [SerializeField] public float atk;
-    [SerializeField] protected float spd;
+    [SerializeField] public float spd;
 
     public float fovRange;
     [Range(0, 360)] public float fovAngle;
