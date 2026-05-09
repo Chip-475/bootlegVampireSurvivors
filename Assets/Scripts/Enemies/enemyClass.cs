@@ -57,6 +57,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected virtual void OnDestroy()
     {
         data.killCount++;
+        spawnManager.enemyCount--;
         data.xpQueue.Enqueue(xpGiven);
         if(!xpBar.queueing) xpBar.startMedium();
     }

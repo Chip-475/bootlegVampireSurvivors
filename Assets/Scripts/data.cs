@@ -23,4 +23,5 @@ public class data : MonoBehaviour
 
     // Counters
     public static int killCount=0;
+    public static int waveEnemy = 0;
 }
