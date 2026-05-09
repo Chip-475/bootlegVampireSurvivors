@@ -6,7 +6,6 @@ public class heavyGrunt : enemyClass
     {
         base.Start();
 
-        spawnManager.heavyGruntAmount++;
     }
     private new void FixedUpdate()
     {
@@ -27,6 +26,5 @@ public class heavyGrunt : enemyClass
     private new void OnDestroy()
     {
         base.OnDestroy();
-        spawnManager.heavyGruntAmount--;
     }
 }

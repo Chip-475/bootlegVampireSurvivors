@@ -14062,10 +14062,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::spawnManager
   enemyList:
+  - {fileID: 3381548320089685549, guid: 804865bfc06b62243ac2136c6d8bc5c2, type: 3}
   - {fileID: 5410895742141266955, guid: caa123e8bb926774f902c1209e6aa04a, type: 3}
   - {fileID: 2011521419539905806, guid: d0941ae16d368224593c3e3ed522b255, type: 3}
-  - {fileID: 3381548320089685549, guid: 804865bfc06b62243ac2136c6d8bc5c2, type: 3}
-  enemyCost: 010000000200000003000000
+  enemyCost: 030000000100000002000000
   waves: 1
   spawnLimit: 0
 --- !u!1 &1683135846
