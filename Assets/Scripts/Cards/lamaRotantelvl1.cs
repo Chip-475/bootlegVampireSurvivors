@@ -9,7 +9,7 @@ public class lamaRotante : MonoBehaviour
     float x, y;
     void Start()
     {
-        if (_play == null) _play = FindObjectOfType<Player>(); //cosi trova il player nella scena
+        if (_play == null) _play = FindObjectOfType<player>(); //cosi trova il player nella scena
     }
     void Update()
     {
@@ -17,8 +17,8 @@ public class lamaRotante : MonoBehaviour
         ang += velocita * Time.deltaTime;//calcolo posizioni cosi puo giraee
         x=_play.transform.position.x+Mathf.Cos(ang*Mathf.Deg2Rad)*dist;
         y=_play.transform.position.y + Mathf.Sin(ang * Mathf.Deg2Rad)*dist;
-        transform.position=new Vector3(x,y,0);
-        trasfrom.Rotate(Vector3.forward*500f*Time.deltaTime);//ruota su stessa
+        this.transform.position=new Vector3(x,y,0);
+        this.trasform.Rotate(Vector3.forward*500f*Time.deltaTime);//ruota su stessa
     }
     
     private void OnTriggerEnter2D(Collider2D other)

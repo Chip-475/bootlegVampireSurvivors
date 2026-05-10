@@ -30,6 +30,7 @@ public class player : MonoBehaviour, IDamageable
     public float atk;
     public float spd;
     public float aspd;
+    public float range;
 
     private Vector2 moveInput;
 

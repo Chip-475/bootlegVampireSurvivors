@@ -9,4 +9,4 @@ public class iceAuraCard : MonoBehaviour
         data.iceAura = true;
         aura.SetActive(true);
     }
-}
+}   

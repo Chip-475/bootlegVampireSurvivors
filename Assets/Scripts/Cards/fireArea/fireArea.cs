@@ -12,9 +12,9 @@ public class fireArea : cardClass
 
         circleCollider = GetComponent<CircleCollider2D>();
         Destroy(gameObject, duration);
-
-        circleCollider.radius = radius;
-        transform.localScale = new Vector3(radius * 2, radius * 2, 0);
+        float raggio = radius * player.range;//aggiorno il range per poi modi
+        circleCollider.radius = raggio;
+        transform.localScale = new Vector3(raggio * 2, raggio* 2, 0);
     }
 
     private void OnTriggerStay2D(Collider2D collision)

@@ -13,7 +13,7 @@ public class playerSpeedlvl1 : MonoBehaviour
 
     public void applica(player p,int livello)
     {
-        float valore;
+        float valore=0f;
         switch(livello)
         {
             case 1:
@@ -23,7 +23,7 @@ public class playerSpeedlvl1 : MonoBehaviour
                 valore = livello2.incremento;
                 break;
         }
-        p.moveSpeed += valore;
+        p.spd += valore;
         Debug.Log("ci siamo");
         Destroy(this);
     }

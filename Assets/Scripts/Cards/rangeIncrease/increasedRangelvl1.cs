@@ -2,15 +2,32 @@ using UnityEngine;
 
 public class increasedRangelvl1 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [System.Serializable]
+    public struct livelloRange
     {
-        
+        public float incremento;
     }
+    [Header("livelli")]
+    public livelloRange lvl1;
+    public livelloRange lvl2;
 
-    // Update is called once per frame
-    void Update()
+    public void potenziamento(player p,int livello)
     {
-        
+        float val=0f;
+        switch(livello)
+        {
+            case 1:
+                val = lvl1.incremento;
+                break;
+            case 2:
+                val = lvl2.incremento; 
+                break;
+            default:
+                val = lvl1.incremento;
+                break;
+        }
+        p.range += val;
+        Debug.Log("duce");
+        Destroy(this);
     }
 }
