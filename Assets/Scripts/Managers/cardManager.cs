@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class cardManager : MonoBehaviour
 {
-    List<GameObject> cards = new List<GameObject>();
-    List<int> cardIndexes = new List<int>();
+    public List<GameObject> cards = new List<GameObject>();
+    static List<int> cardIndexes = new List<int>();
 
     void Start()
     {
@@ -20,8 +20,9 @@ public class cardManager : MonoBehaviour
 
     }
 
-    void pickCard()
+    public static void spawnCards()
     {
+
         int[] toSpawn = new int[3];
         for(int i = 0; i < 3; i++)
         {
@@ -31,5 +32,13 @@ public class cardManager : MonoBehaviour
         }
 
         // Card spawn to code
+    }
+    public int countCards()
+    {
+        int i = 0;
+        for ( i = 0; i < cards.Count; i++)
+        {
+        }
+        return i;
     }
 }
