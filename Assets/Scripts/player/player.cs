@@ -6,11 +6,14 @@ using UnityEngine.UI;
 public class player : MonoBehaviour, IDamageable
 {
     [Header("Misc")]
+    public GameObject self;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
 
     public GameObject scytheTrf;
     public scythe scythe;
+
+    public GameObject fireArea;
 
     public gameManager gameManager;
     public hpBar hpBar;
@@ -18,6 +21,7 @@ public class player : MonoBehaviour, IDamageable
 
     public bool isDead;
     public bool canAttack = true;
+    public bool canLaunch = true;
 
     public Vector3 mousePosition;
     public Vector3 mouseWorldPosition;
@@ -33,6 +37,7 @@ public class player : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        self = GetComponent<GameObject>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -41,6 +46,8 @@ public class player : MonoBehaviour, IDamageable
 
         hpBar = GetComponent<hpBar>();
         xpBar = GetComponent<xpBar>();
+
+        StartCoroutine(spawnFireArea());
     }
     void FixedUpdate()
     {
@@ -91,17 +98,14 @@ public class player : MonoBehaviour, IDamageable
         if (hp == 0) { sr.enabled = false; isDead = true; }
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
     }
-    //public void onKill(float toGain)
-    //{
-    //    data.xp += data.xpQueue.Dequeue();
-    //    if(data.xp >= data.xpMax)
-    //    {
-    //        data.xp -= data.xpMax;
-    //        data.level++;
-    //    }
-    //    xpBar.xpBarCurve = AnimationCurve.EaseInOut(0, (data.xp - toGain) / 100f, xpBar.animTime, data.xp / 100f);
-    //    StartCoroutine(xpBar.xpBarMovement());
-    //}
+    IEnumerator spawnFireArea()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(10);
+            if (data.fireArea) Instantiate(fireArea, transform.position, Quaternion.identity);
+        }
+    }
 
     // Interface Methods
     public void damage(float damage)

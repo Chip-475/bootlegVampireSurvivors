@@ -1,5 +1,5 @@
+using Unity.Behavior;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public abstract class enemyClass : MonoBehaviour, IDamageable
 {
@@ -11,6 +11,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     public xpBar xpBar;
     protected Rigidbody2D prb;
     protected Collider2D _collider;
+    protected BehaviorGraphAgent _graph;
 
     protected bool inRange;
     protected bool detecting;
@@ -20,7 +21,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected float hpMax;
     public float xpGiven;
     [SerializeField] public float atk;
-    [SerializeField] protected float spd;
+    [SerializeField] public float spd;
 
     public float fovRange;
     [Range(0, 360)] public float fovAngle;
@@ -34,6 +35,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
         xpBar = playerObj.GetComponent<xpBar>();
         prb = playerObj.GetComponent<Rigidbody2D>();
         _collider = GetComponent<Collider2D>();
+        _graph = GetComponent<BehaviorGraphAgent>();
 
         hpMax = hp;
     }
@@ -55,7 +57,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     {
         data.killCount++;
         data.xpQueue.Enqueue(xpGiven);
-        if (!xpBar.queueing) xpBar.startMedium();
+        if(!xpBar.queueing) xpBar.startMedium();
     }
 
 
