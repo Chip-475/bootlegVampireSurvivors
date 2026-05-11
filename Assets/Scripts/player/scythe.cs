@@ -155,4 +155,12 @@ public class scythe : MonoBehaviour
     {
         if(lvlDanno<3)lvlDanno++;
     }
+
+    /*
+     * if(equip!=null&&equip.isSpara())
+     * {
+     *      Vector2 direction=player.sr.flipX? Vector2.left:Vector2.right;
+     *      equip.spara(transform.position,direzione);
+     * }
+     */
 }
