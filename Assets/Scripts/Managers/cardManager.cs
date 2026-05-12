@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,10 +21,11 @@ public class cardManager : MonoBehaviour
 
     }
 
+    
     public static void spawnCards()
     {
 
-        int[] toSpawn = new int[3];
+        public List<int> toSpawn= new list;
         for(int i = 0; i < 3; i++)
         {
             var x = Random.Range(0, cardIndexes.Count);
@@ -33,12 +35,3 @@ public class cardManager : MonoBehaviour
 
         // Card spawn to code
     }
-    public int countCards()
-    {
-        int i = 0;
-        for ( i = 0; i < cards.Count; i++)
-        {
-        }
-        return i;
-    }
-}
