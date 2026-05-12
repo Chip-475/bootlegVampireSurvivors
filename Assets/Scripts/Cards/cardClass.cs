@@ -4,7 +4,7 @@ public class cardClass : MonoBehaviour
 {
     protected player player;
     
-    protected int lvl;
+    public int lvl;
     public int lvlMax;
     protected bool active = false;
 
@@ -15,4 +15,5 @@ public class cardClass : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponent<player>();
     }
+
 }
