@@ -1,16 +1,15 @@
 using UnityEngine;
 
 [RequireComponent (typeof(CircleCollider2D))]
-public class fireArea : MonoBehaviour
+public class fireArea : cardClass
 {
-    public player player;
     public CircleCollider2D circleCollider;
-    public float duration;
-    public float radius;
 
     private void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<player>();
+        active = true;
+        lvl++;
+
         circleCollider = GetComponent<CircleCollider2D>();
         Destroy(gameObject, duration);
 

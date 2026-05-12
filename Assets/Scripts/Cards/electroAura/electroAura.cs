@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class electroAura : MonoBehaviour
+public class electroAura : cardClass
 {
-    private player player;
-    public float radius;
+    
     private List<GameObject> list = new List<GameObject>();
 
     private void OnEnable()
     {
-        player = transform.parent.gameObject.GetComponent<player>();
+        active = true;
+        lvl++;
+
         transform.localScale = new Vector3(radius * 2, radius * 2, 0);
 
         StartCoroutine(damage());
