@@ -6,7 +6,6 @@ public class lightGrunt : enemyClass
     {
         base.Start();
 
-        spawnManager.lightGruntAmount++;
     }
     private new void FixedUpdate()
     {
@@ -27,6 +26,5 @@ public class lightGrunt : enemyClass
     private new void OnDestroy()
     {
         base.OnDestroy();
-        spawnManager.lightGruntAmount--;
     }
 }

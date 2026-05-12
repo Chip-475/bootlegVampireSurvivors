@@ -18,6 +18,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
 
     [Header("Stats")]
     [SerializeField] public float hp;
+    [SerializeField ] public int spawnCost;
     protected float hpMax;
     public float xpGiven;
     [SerializeField] public float atk;
@@ -56,6 +57,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     protected virtual void OnDestroy()
     {
         data.killCount++;
+        spawnManager.enemyCount--;
         data.xpQueue.Enqueue(xpGiven);
         if(!xpBar.queueing) xpBar.startMedium();
     }

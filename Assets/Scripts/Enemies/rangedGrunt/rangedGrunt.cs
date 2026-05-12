@@ -15,7 +15,6 @@ public class rangedGrunt : enemyClass
         canShoot = false;
         sinceShoot = shootCD;
 
-        spawnManager.rangedGruntAmount++;
     }
     private new void FixedUpdate()
     {
@@ -49,6 +48,5 @@ public class rangedGrunt : enemyClass
     private new void OnDestroy()
     {
         base.OnDestroy();
-        spawnManager.rangedGruntAmount--;
     }
 }
