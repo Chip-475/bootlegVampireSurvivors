@@ -3,8 +3,15 @@ using UnityEngine;
 public class cardClass : MonoBehaviour
 {
     protected player player;
+    public enum type
+    {
+        electroAuraPerk,
+        iceAuraPerk,
+        fireAreaPerk
+    }
+    public type perk;
     
-    protected int lvl;
+    public int lvl;
     public int lvlMax;
     protected bool active = false;
 
