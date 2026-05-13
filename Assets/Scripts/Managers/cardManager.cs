@@ -15,7 +15,7 @@ public class cardManager : MonoBehaviour
         CardManager = this;
         for(int i = 0;i < Effectcards.Count; i++)
         {
-            cardsComp[i] = Effectcards[i].GetComponent<cardClass>();
+            cardsComp.Add(Effectcards[i].GetComponent<cardClass>());
         }
         
     }
@@ -33,6 +33,7 @@ public class cardManager : MonoBehaviour
             else
             {
                 Selectedcards.Add(cards[x]);
+                Instantiate(Selectedcards[i]);
             }
             
         }
@@ -41,6 +42,7 @@ public class cardManager : MonoBehaviour
             Instantiate(Selectedcards[i]);
         }
     }
+    [ContextMenu("canedio")]
     public void electroAura()
     {
         foreach(GameObject x  in Effectcards)
