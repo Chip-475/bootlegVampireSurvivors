@@ -22,4 +22,5 @@ public class cardClass : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponent<player>();
     }
+
 }

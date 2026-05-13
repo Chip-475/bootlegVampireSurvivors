@@ -28,7 +28,7 @@ public class player : MonoBehaviour, IDamageable
 
     [Header("Stats")]
     public float hp;
-    private float hpMax;
+    public float hpMax;
     public float atk;
     public float spd;
     public float aspd;
@@ -48,10 +48,11 @@ public class player : MonoBehaviour, IDamageable
         xpBar = GetComponent<xpBar>();
 
         StartCoroutine(spawnFireArea());
+        hpMax = 100;
     }
     void FixedUpdate()
     {
-        hpMax = hp;
+        
 
         // Mouse Positions Assignment
         mousePosition = Mouse.current.position.ReadValue();
