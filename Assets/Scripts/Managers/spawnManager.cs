@@ -4,24 +4,10 @@ public class spawnManager : MonoBehaviour
 {
     public GameObject[] enemyList;
     public int[] enemyCost;
-    public int waves=0;
+    public int waves=1;
     public int spawnLimit;
     public static int enemyCount;
-    public bool isSpawning = false;
     [ContextMenu("Run Function")]
-    private void Start()
-    {
-        waves = 0;
-    }
-    private void Update()
-    {
-        if(enemyCount<=0&&!isSpawning)
-        {
-            Invoke(nameof(newWave),2.5f);
-            isSpawning = true;
-            waves++;
-        }
-    }
     public void newWave()
     {
         spawnLimit = waves * 10;
@@ -42,6 +28,5 @@ public class spawnManager : MonoBehaviour
             }
             
         }
-        isSpawning=false;
     }
 }

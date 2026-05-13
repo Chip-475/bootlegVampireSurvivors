@@ -42,7 +42,7 @@ public class xpBar : MonoBehaviour  // ATTACHED TO PLAYER
     public IEnumerator xpBarMovement(float totGain)
     {
         float currentXp = xpBarObject.fillAmount * data.xpMax;
-        data.xp = currentXp;
+        
         float toGain = Mathf.Min(totGain, data.xpMax - currentXp);
         float overflow = totGain - toGain;
 
@@ -65,8 +65,11 @@ public class xpBar : MonoBehaviour  // ATTACHED TO PLAYER
     {
         xpBarObject.fillAmount = 0;
         data.level++;
+<<<<<<< HEAD
         data.xp = 0;
         //cardManager.spawnCards();
+=======
+>>>>>>> parent of 650007a (Merge branch 'mastery0')
         data.xpMax += data.xpMax * 0.2f;
 
         // Level up sfx
