@@ -7,26 +7,25 @@ public class cardManager : MonoBehaviour
 {
     public List<GameObject> cardPrefabs = new List<GameObject>();
     public List<GameObject> cardObjects = new List<GameObject>();
-    List<cardClass> cardComps = new List<cardClass>();
 
-    void Start()
+    [ContextMenu("diocane")]
+    void spawnCards()
     {
-        foreach(GameObject x in cardObjects)
+        List<int> indexes = new List<int>(3);
+        for(int i = 0; i < indexes.Count - 1; i++)
         {
-            cardComps.Add(x.GetComponent<cardClass>());
+            while (true)
+            {
+                var x = Random.Range(0, indexes.Count - 1);
+                indexes[i] = x;
+                if (!indexes.Contains(x)) break;
+            }
+        }
+        foreach (var x in indexes)
+        {
+            print(x);
         }
     }
-
-    void Update()
-    {
-
-    }
-
-    void pickCard()
-    {
-        
-    }
-
 
     void electroAuraClick()
     {
