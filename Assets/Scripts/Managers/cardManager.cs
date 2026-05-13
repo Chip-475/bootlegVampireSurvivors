@@ -6,15 +6,16 @@ using UnityEngine;
 public class cardManager : MonoBehaviour
 {
     public List<GameObject> cards = new List<GameObject>();
+    public List<GameObject> Effectcards = new List<GameObject>();
     public static cardManager CardManager;
     public List<GameObject> Selectedcards = new List<GameObject>();
-    public List <cardClass> cardsComp=new List <cardClass>();
+    private List <cardClass> cardsComp=new List <cardClass>();
     void Start()
     {
         CardManager = this;
-        for (int i = 0; i < cards.Count; i++)
+        for(int i = 0;i < Effectcards.Count; i++)
         {
-            cardsComp[i]=cards[i].GetComponent<cardClass>();
+            cardsComp[i] = Effectcards[i].GetComponent<cardClass>();
         }
         
     }
@@ -38,6 +39,18 @@ public class cardManager : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             Instantiate(Selectedcards[i]);
+        }
+    }
+    public void electroAura()
+    {
+        foreach(GameObject x  in Effectcards)
+        {
+            if(x is electroAura)
+            {
+                data.electroAura = true;
+                x.SetActive(true);
+
+            }
         }
     }
 }
