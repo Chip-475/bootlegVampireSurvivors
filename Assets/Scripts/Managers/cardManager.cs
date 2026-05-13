@@ -5,6 +5,8 @@ using static UnityEngine.Rendering.GPUSort;
 
 public class cardManager : MonoBehaviour
 {
+    // NON RUNNARE spawnCards FIGLIO DI PUTTANA e non modificare
+
     public List<GameObject> cardPrefabs = new List<GameObject>();
     public List<GameObject> cardObjects = new List<GameObject>();
 
@@ -12,13 +14,15 @@ public class cardManager : MonoBehaviour
     void spawnCards()
     {
         List<int> indexes = new List<int>(3);
-        for(int i = 0; i < indexes.Count - 1; i++)
+        for(int i = 0; i < indexes.Capacity; i++)
         {
-            while (true)
+            while (indexes.Count < 3)
             {
-                var x = Random.Range(0, indexes.Count - 1);
-                indexes[i] = x;
-                if (!indexes.Contains(x)) break;
+                int x = Random.Range(0, cardPrefabs.Count);
+                if (!indexes.Contains(x))
+                {
+                    indexes.Add(x);
+                }
             }
         }
         foreach (var x in indexes)
