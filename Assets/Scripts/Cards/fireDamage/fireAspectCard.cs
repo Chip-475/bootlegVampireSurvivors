@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class fireAspectCard : MonoBehaviour
+public class fireAspectCard : cardClass
 {
     private void onClick()
     {
         data.fireAspectLvl++;
+        lvl++;
     }
 }

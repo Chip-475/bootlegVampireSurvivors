@@ -1,35 +1,73 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.GPUSort;
 
 public class cardManager : MonoBehaviour
 {
-    List<GameObject> cards = new List<GameObject>();
-    List<int> cardIndexes = new List<int>();
+    // NON RUNNARE spawnCards FIGLIO DI PUTTANA e non modificare
 
-    void Start()
+    public List<GameObject> cardPrefabs = new List<GameObject>();
+    public List<GameObject> cardObjects = new List<GameObject>();
+
+    [ContextMenu("diocane")]
+    void spawnCards()
     {
-        for(int i = 0; i < cards.Count; i++)
+        List<int> indexes = new List<int>(3);
+        for(int i = 0; i < indexes.Capacity; i++)
         {
-            cardIndexes.Add(i);
+            while (indexes.Count < 3)
+            {
+                int x = Random.Range(0, cardPrefabs.Count);
+                if (!indexes.Contains(x))
+                {
+                    indexes.Add(x);
+                }
+            }
+        }
+        foreach (var x in indexes)
+        {
+            print(x);
         }
     }
 
-    void Update()
+    void electroAuraClick()
     {
-
-    }
-
-    void pickCard()
-    {
-        int[] toSpawn = new int[3];
-        for(int i = 0; i < 3; i++)
+        foreach(GameObject x in cardObjects)
         {
-            var x = Random.Range(0, cardIndexes.Count);
-            toSpawn[i] = x;
-            cardIndexes.Remove(x);
+            cardClass temp = x.GetComponent<cardClass>();
+            if(temp.perk == cardClass.type.electroAuraPerk)
+            {
+                data.electroAura = true;
+                temp.lvl++;
+                cardObjects.Remove(x);
+            }
         }
-
-        // Card spawn to code
+    }
+    void iceAuraClick()
+    {
+        foreach (GameObject x in cardObjects)
+        {
+            cardClass temp = x.GetComponent<cardClass>();
+            if (temp.perk == cardClass.type.iceAuraPerk)
+            {
+                data.electroAura = true;
+                temp.lvl++;
+                cardObjects.Remove(x);
+            }
+        }
+    }
+    void fireAreaClick()
+    {
+        foreach (GameObject x in cardObjects)
+        {
+            cardClass temp = x.GetComponent<cardClass>();
+            if (temp.perk == cardClass.type.fireAreaPerk)
+            {
+                data.electroAura = true;
+                temp.lvl++;
+                cardObjects.Remove(x);
+            }
+        }
     }
 }

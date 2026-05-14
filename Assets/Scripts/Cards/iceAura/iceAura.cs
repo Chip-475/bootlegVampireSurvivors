@@ -1,12 +1,13 @@
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class iceAura : MonoBehaviour
+public class iceAura : cardClass
 {
-    public float radius;
-
     private void OnEnable()
     {
+        active = true;
+        lvl++;
+
         transform.localScale = new Vector3(radius * 2, radius * 2, 0);
     }
 
