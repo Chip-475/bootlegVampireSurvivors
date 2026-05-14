@@ -5,8 +5,9 @@ public class fireArea : cardClass
 {
     public CircleCollider2D circleCollider;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         active = true;
 
         circleCollider = GetComponent<CircleCollider2D>();
@@ -21,7 +22,7 @@ public class fireArea : cardClass
         if(collision.CompareTag("Enemy") && !collision.gameObject.TryGetComponent<DoT>(out _))
         {
             DoT dot = collision.gameObject.AddComponent<DoT>();
-            dot.damage = player.atk / 5;
+            dot.damage = player.atk*lvl / 5;
             dot.duration = 5f;
             dot.tick = 1 / 3f;
         }

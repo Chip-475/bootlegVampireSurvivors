@@ -112,7 +112,7 @@ MonoBehaviour:
   xpBar: {fileID: 0}
   hp: 10
   spawnCost: 0
-  xpGiven: 10
+  xpGiven: 100
   atk: 5
   spd: 3
   fovRange: 5
