@@ -93,7 +93,7 @@ public class player : MonoBehaviour, IDamageable
     {
         hpBar.hpBarCurve = AnimationCurve.EaseInOut(0, hp / 100f, hpBar.animTime, (hp - damage) / 100f);
         hp -= damage;
-        Mathf.Clamp(hp, 0, hpMax);
+        hp=Mathf.Clamp(hp, 0, hpMax);
         StartCoroutine(hpBar.hpBarMovement());
         if (hp == 0) { sr.enabled = false; isDead = true; }
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");

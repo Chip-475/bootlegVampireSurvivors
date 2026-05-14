@@ -8,7 +8,6 @@ public class fireArea : cardClass
     private void Start()
     {
         active = true;
-        lvl++;
 
         circleCollider = GetComponent<CircleCollider2D>();
         Destroy(gameObject, duration);
