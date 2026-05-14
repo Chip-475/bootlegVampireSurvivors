@@ -12,7 +12,7 @@ public class xpBar : MonoBehaviour  // ATTACHED TO PLAYER
 
     public bool queueing;
     public float queueTimer;
-
+    public GameObject cardsLabel;
     public void startMedium()
     {
         StartCoroutine(xpBarSetGain());
@@ -66,6 +66,7 @@ public class xpBar : MonoBehaviour  // ATTACHED TO PLAYER
         xpBarObject.fillAmount = 0;
         data.level++;
         data.xp = 0;
+        cardsLabel.SetActive(true);
         cardManager.instance.spawnCards();
         data.xpMax += data.xpMax * 0.2f;
 
