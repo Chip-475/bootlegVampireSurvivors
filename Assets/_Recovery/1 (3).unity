@@ -16437,7 +16437,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1127353843}
-  - component: {fileID: 1127353844}
   m_Layer: 0
   m_Name: spawnManager
   m_TagString: Untagged
@@ -16460,25 +16459,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1127353844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1127353842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c31be3bb3d9179f4e91fab068f2df90d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::spawnManager
-  enemyList:
-  - {fileID: 5410895742141266955, guid: caa123e8bb926774f902c1209e6aa04a, type: 3}
-  - {fileID: 2011521419539905806, guid: d0941ae16d368224593c3e3ed522b255, type: 3}
-  - {fileID: 3381548320089685549, guid: 804865bfc06b62243ac2136c6d8bc5c2, type: 3}
-  enemyCost: 010000000200000003000000
-  waves: 1
-  spawnLimit: 0
 --- !u!1 &1151721198
 GameObject:
   m_ObjectHideFlags: 0
@@ -17363,6 +17343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617267568}
   - component: {fileID: 1617267569}
+  - component: {fileID: 1617267570}
   - component: {fileID: 1617267571}
   m_Layer: 0
   m_Name: gameManager
@@ -17399,6 +17380,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
   pauseMenu: {fileID: 1701881807}
+--- !u!114 &1617267570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617267566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31be3bb3d9179f4e91fab068f2df90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::spawnManager
+  enemyList:
+  - {fileID: 5410895742141266955, guid: caa123e8bb926774f902c1209e6aa04a, type: 3}
+  - {fileID: 2011521419539905806, guid: d0941ae16d368224593c3e3ed522b255, type: 3}
+  - {fileID: 3381548320089685549, guid: 804865bfc06b62243ac2136c6d8bc5c2, type: 3}
+  enemyCost: 010000000200000003000000
+  waves: 1
+  spawnLimit: 0
 --- !u!114 &1617267571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17414,7 +17414,7 @@ MonoBehaviour:
   wave: {fileID: 2071923855}
   enemyKilled: {fileID: 104950003}
   enemyRemaining: {fileID: 493519743}
-  spawnManager: {fileID: 0}
+  spawnManager: {fileID: 1617267570}
 --- !u!1 &1622327813
 GameObject:
   m_ObjectHideFlags: 0
