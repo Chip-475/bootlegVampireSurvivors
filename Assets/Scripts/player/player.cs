@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class player : MonoBehaviour, IDamageable
 {
     [Header("Misc")]
+    public static player playerInstance;
+
     public GameObject self;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
@@ -42,6 +44,8 @@ public class player : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        playerInstance = this;
+
         self = GetComponent<GameObject>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
