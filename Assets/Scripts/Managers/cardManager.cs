@@ -25,14 +25,13 @@ public class cardManager : MonoBehaviour
         spawnableCards = cards;
     }
 
+    [ContextMenu("Run spawnCards")]
     public void spawnCards()
     {
         Time.timeScale = 0;
         cardPanel.SetActive(true);
 
         int cardsToSpawn = Mathf.Min(choices, spawnableCards.Count);
-        Debug.Log($"cardManager: {spawnableCards.Count} available cards out of {cards.Count} total.");
-
         if (cardsToSpawn == 0)
         {
             Debug.LogWarning("cardManager: no valid cards to spawn.");
@@ -42,12 +41,18 @@ public class cardManager : MonoBehaviour
         List<int> index = new List<int>();
         for (int i = 0; i < cardsToSpawn; i++)
         {
-            int x = Random.Range(choices, spawnableCards.Count);
+            int x = Random.Range(0, spawnableCards.Count);
             if (index.Contains(x)) { i--; continue; }
             index.Add(x);
 
             CardEntry entry = spawnableCards[x];
             if (entry.levelable && entry.effect.lvl == 5)
+            {
+                spawnableCards.Remove(entry);
+                i--;
+                continue;
+            }
+            else if(!entry.levelable && entry.effect.lvl == 1)
             {
                 spawnableCards.Remove(entry);
                 i--;
@@ -69,6 +74,7 @@ public class cardManager : MonoBehaviour
     {
         if (!canSpawn(entry)) return;
 
+        entry.effect.GetComponent<ICardEffect>().cardEffect();
         clearSpawnedCards();
         cardPanel.SetActive(false);
     }
