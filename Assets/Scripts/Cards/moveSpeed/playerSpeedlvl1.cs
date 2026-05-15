@@ -2,15 +2,29 @@ using UnityEngine;
 
 public class playerSpeedlvl1 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [System.Serializable]
+    public struct lvlVelocita
     {
-        
+        public float incremento;
     }
+    [Header("livelli")]
+    public lvlVelocita livello1 = new lvlVelocita { incremento = 2f };
+    public lvlVelocita livello2 = new lvlVelocita { incremento = 5f };
 
-    // Update is called once per frame
-    void Update()
+    public void applica(player p,int livello)
     {
-        
+        float valore;
+        switch(livello)
+        {
+            case 1:
+                valore = livello1.incremento;
+                break;
+            case 2:
+                valore = livello2.incremento;
+                break;
+        }
+        p.moveSpeed += valore;
+        Debug.Log("ci siamo");
+        Destroy(this);
     }
 }
