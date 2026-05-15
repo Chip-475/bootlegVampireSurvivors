@@ -17285,7 +17285,7 @@ GameObject:
   - component: {fileID: 1496556819}
   - component: {fileID: 1496556820}
   m_Layer: 0
-  m_Name: cardsManager
+  m_Name: cardManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17318,10 +17318,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275dd4728f221e547a9b93301bfa119f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::cardManager
-  cardPrefabs:
-  - {fileID: 1946500059}
-  - {fileID: 380954466}
-  cardObjects: []
+  cards: []
+  cardParent: {fileID: 0}
+  choices: 3
+  cardLabel: {fileID: 0}
 --- !u!1 &1507533910
 GameObject:
   m_ObjectHideFlags: 0
