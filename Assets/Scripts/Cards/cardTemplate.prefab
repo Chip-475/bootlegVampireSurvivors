@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 1029642288609608678}
   - component: {fileID: 144252766500792477}
   - component: {fileID: -2597234958754123037}
+  - component: {fileID: -1601211551495213313}
   m_Layer: 5
   m_Name: cardTemplate
   m_TagString: Untagged
@@ -273,6 +274,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-1601211551495213313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7797442579612422426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a8d4f9c2e6b41a8a4f23d77b8c90e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::cardChoice
 --- !u!1 &8095693638025886144
 GameObject:
   m_ObjectHideFlags: 0

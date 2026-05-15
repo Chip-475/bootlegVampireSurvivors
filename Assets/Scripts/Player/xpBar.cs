@@ -66,7 +66,7 @@ public class xpBar : MonoBehaviour  // ATTACHED TO PLAYER
         xpBarObject.fillAmount = 0;
         data.level++;
         data.xp = 0;
-        //cardManager.spawnCards();
+        cardManager.instance.spawnCards();
         data.xpMax += data.xpMax * 0.2f;
         yield return null;
     }

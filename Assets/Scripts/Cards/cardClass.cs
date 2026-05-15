@@ -18,7 +18,7 @@ public class cardClass : MonoBehaviour
     public float radius;
     public float duration;
 
-    private void Start()
+    protected virtual void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<player>();
     }

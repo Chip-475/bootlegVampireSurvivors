@@ -1,73 +1,95 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.GPUSort;
 
 public class cardManager : MonoBehaviour
 {
-    // NON RUNNARE spawnCards FIGLIO DI PUTTANA e non modificare
-
-    public List<GameObject> cardPrefabs = new List<GameObject>();
-    public List<GameObject> cardObjects = new List<GameObject>();
-
-    [ContextMenu("diocane")]
-    void spawnCards()
+    [System.Serializable]
+    public class CardEntry
     {
-        List<int> indexes = new List<int>(3);
-        for(int i = 0; i < indexes.Capacity; i++)
+        public GameObject prefab;
+        public cardClass effect;
+        public bool levelable;
+    }
+
+    public static cardManager instance;
+
+    public List<CardEntry> cards = new List<CardEntry>();
+    public List<CardEntry> spawnableCards = new List<CardEntry>();
+    public Transform cardParent;
+    public int choices = 3;
+    public GameObject cardPanel;
+
+    void Awake()
+    {
+        instance = this;
+        spawnableCards = cards;
+    }
+
+    public void spawnCards()
+    {
+        Time.timeScale = 0;
+        cardPanel.SetActive(true);
+
+        int cardsToSpawn = Mathf.Min(choices, spawnableCards.Count);
+        Debug.Log($"cardManager: {spawnableCards.Count} available cards out of {cards.Count} total.");
+
+        if (cardsToSpawn == 0)
         {
-            while (indexes.Count < 3)
-            {
-                int x = Random.Range(0, cardPrefabs.Count);
-                if (!indexes.Contains(x))
-                {
-                    indexes.Add(x);
-                }
-            }
+            Debug.LogWarning("cardManager: no valid cards to spawn.");
+            return;
         }
-        foreach (var x in indexes)
+
+        List<int> index = new List<int>();
+        for (int i = 0; i < cardsToSpawn; i++)
         {
-            print(x);
+            int x = Random.Range(choices, spawnableCards.Count);
+            if (index.Contains(x)) { i--; continue; }
+            index.Add(x);
+
+            CardEntry entry = spawnableCards[x];
+            if (entry.levelable && entry.effect.lvl == 5)
+            {
+                spawnableCards.Remove(entry);
+                i--;
+                continue;
+            }
+
+            GameObject spawnedCard = Instantiate(entry.prefab, cardParent);
+            spawnedCard.name = $"{entry.prefab.name} lvl {entry.effect.lvl}";
+
+            spawnedCard.TryGetComponent(out cardChoice choice);
+            if (choice != null)
+            {
+                choice.setup(instance, entry);
+            }
         }
     }
 
-    void electroAuraClick()
+    public void pickCard(CardEntry entry)
     {
-        foreach(GameObject x in cardObjects)
-        {
-            cardClass temp = x.GetComponent<cardClass>();
-            if(temp.perk == cardClass.type.electroAuraPerk)
-            {
-                data.electroAura = true;
-                temp.lvl++;
-                cardObjects.Remove(x);
-            }
-        }
+        if (!canSpawn(entry)) return;
+
+        clearSpawnedCards();
+        cardPanel.SetActive(false);
     }
-    void iceAuraClick()
+
+    private bool canSpawn(CardEntry entry)
     {
-        foreach (GameObject x in cardObjects)
+        if (entry.levelable && entry.effect.lvl == 5)
         {
-            cardClass temp = x.GetComponent<cardClass>();
-            if (temp.perk == cardClass.type.iceAuraPerk)
-            {
-                data.electroAura = true;
-                temp.lvl++;
-                cardObjects.Remove(x);
-            }
+            Debug.Log($"cardManager: skipped {entry.prefab.name} lvl {entry.effect.lvl}; effect is already maxed at {entry.effect.lvl}/{5}.");
+            return false;
         }
+
+        return true;
     }
-    void fireAreaClick()
+
+    private void clearSpawnedCards()
     {
-        foreach (GameObject x in cardObjects)
+
+        foreach (Transform child in cardParent)
         {
-            cardClass temp = x.GetComponent<cardClass>();
-            if (temp.perk == cardClass.type.fireAreaPerk)
-            {
-                data.electroAura = true;
-                temp.lvl++;
-                cardObjects.Remove(x);
-            }
+            Destroy(child.gameObject);
         }
     }
 }
