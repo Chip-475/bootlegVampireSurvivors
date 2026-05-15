@@ -47,7 +47,7 @@ public class cardManager : MonoBehaviour
             index.Add(x);
 
             CardEntry entry = spawnableCards[x];
-            if(entry.levelable && entry.effect.lvl == 5)
+            if (entry.levelable && entry.effect.lvl == 5)
             {
                 spawnableCards.Remove(entry);
                 i--;
@@ -58,7 +58,7 @@ public class cardManager : MonoBehaviour
             spawnedCard.name = $"{entry.prefab.name} lvl {entry.effect.lvl}";
 
             spawnedCard.TryGetComponent(out cardChoice choice);
-            if(choice != null)
+            if (choice != null)
             {
                 choice.setup(instance, entry);
             }

@@ -11,7 +11,6 @@ public class electroAura : cardClass
     private void OnEnable()
     {
         active = true;
-        lvl++;
 
         transform.localScale = new Vector3(radius * 2, radius * 2, 0);
 
