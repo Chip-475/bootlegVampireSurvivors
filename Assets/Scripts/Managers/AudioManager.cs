@@ -106,6 +106,6 @@ public class AudioManager : MonoBehaviour
         //quando ci sara il file con i dati fissi
         if(masterSlider!=null) masterSlider.SetValueWithoutNotify(50f);
         if(prefabSlider!=null) prefabSlider.SetValueWithoutNotify(50f);
-        if (bckSlider != null) bckSlider.SetValueWithoutNotify(50f);
+        if(bckSlider != null) bckSlider.SetValueWithoutNotify(50f);
     }
 }
