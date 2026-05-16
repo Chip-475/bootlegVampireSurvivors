@@ -15,12 +15,12 @@ public class spawnManager : MonoBehaviour
     }
     private void Update()
     {
-        if (enemyCount <= 0 && !isSpawning)
-        {
-            Invoke(nameof(newWave), 2.5f);
-            isSpawning = true;
-            waves++;
-        }
+        //if (enemyCount <= 0 && !isSpawning)
+        //{
+        //    Invoke(nameof(newWave), 2.5f);
+        //    isSpawning = true;
+        //    waves++;
+        //}
     }
     public void newWave()
     {

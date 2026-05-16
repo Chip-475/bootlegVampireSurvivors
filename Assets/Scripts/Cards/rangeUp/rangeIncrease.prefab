@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 1026619492035287244}
   - component: {fileID: 8759793599553360798}
   m_Layer: 5
-  m_Name: haste
+  m_Name: rangeIncrease
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Increase attacking speed
+  m_text: 'Increases card effect range
 
 '
   m_isRightToLeft: 0
