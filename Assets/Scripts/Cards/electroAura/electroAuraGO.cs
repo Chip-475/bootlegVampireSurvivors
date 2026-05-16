@@ -9,10 +9,8 @@ public class electroAuraGO : cardClass, ICardEffect
 
     private new void Start()
     {
-        base.Start();
         StartCoroutine(damage());
     }
-
     IEnumerator damage()
     {
         while (true)
@@ -38,6 +36,7 @@ public class electroAuraGO : cardClass, ICardEffect
     public void effect()
     {
         transform.localScale = new Vector2(radius * 2, radius * 2);
+        print("electroAura picked");
     }
     public void cardEffect()
     {

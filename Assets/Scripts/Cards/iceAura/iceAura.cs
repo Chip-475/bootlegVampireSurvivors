@@ -16,6 +16,7 @@ public class iceAura : cardClass, ICardEffect
     public void effect()
     {
         transform.localScale = new Vector3(radius * 2, radius * 2, 0);
+        print("iceAura picked");
     }
     public void cardEffect()
     {

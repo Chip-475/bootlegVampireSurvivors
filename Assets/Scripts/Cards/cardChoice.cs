@@ -13,9 +13,9 @@ public class cardChoice : MonoBehaviour
 
     public void onClick()
     {
-        Debug.Log("card picked");
         if (manager != null && entry != null)
         {
+            Debug.Log("card picked");
             manager.pickCard(entry);
         }
     }
