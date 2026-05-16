@@ -6,11 +6,16 @@ using UnityEngine.UI;
 public class player : MonoBehaviour, IDamageable
 {
     [Header("Misc")]
+    public static player playerInstance;
+
+    public GameObject self;
     public Rigidbody2D rb;
     public SpriteRenderer sr;
 
     public GameObject scytheTrf;
     public scythe scythe;
+
+    public GameObject fireArea;
 
     public gameManager gameManager;
     public hpBar hpBar;
@@ -18,13 +23,14 @@ public class player : MonoBehaviour, IDamageable
 
     public bool isDead;
     public bool canAttack = true;
+    public bool canLaunch = true;
 
     public Vector3 mousePosition;
     public Vector3 mouseWorldPosition;
 
     [Header("Stats")]
     public float hp;
-    private float hpMax;
+    public float hpMax;
     public float atk;
     public float spd;
     public float aspd;
@@ -33,6 +39,9 @@ public class player : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        playerInstance = this;
+
+        self = GetComponent<GameObject>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
@@ -41,6 +50,8 @@ public class player : MonoBehaviour, IDamageable
 
         hpBar = GetComponent<hpBar>();
         xpBar = GetComponent<xpBar>();
+
+        StartCoroutine(spawnFireArea());
     }
     void FixedUpdate()
     {
@@ -90,17 +101,18 @@ public class player : MonoBehaviour, IDamageable
     {
         hpBar.hpBarCurve = AnimationCurve.EaseInOut(0, hp / 100f, hpBar.animTime, (hp - damage) / 100f);
         hp -= damage;
-        Mathf.Clamp(hp, 0, hpMax);
+        hp=Mathf.Clamp(hp, 0, hpMax);
         StartCoroutine(hpBar.hpBarMovement());
         if (hp == 0) { sr.enabled = false; isDead = true; }
         print("Damaged for: " + damage + "\n" + "Remaining HP: " + hp + "\n");
     }
-    public void onKill(float toGain)
+    IEnumerator spawnFireArea()
     {
-        data.xp += toGain;
-        xpBar.xpBarCurve = AnimationCurve.EaseInOut(0, (data.xp - toGain) / 100f, xpBar.animTime, data.xp / 100f);
-        StartCoroutine(xpBar.xpBarMovement());
-        print("onKill");
+        while (true)
+        {
+            yield return new WaitForSeconds(10);
+            if (data.fireArea) Instantiate(fireArea, transform.position, Quaternion.identity);
+        }
     }
 
     // Interface Methods

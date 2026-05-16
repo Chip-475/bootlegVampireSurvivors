@@ -35,11 +35,12 @@ public class scythe : MonoBehaviour
 
         sr.enabled = true;
 
+        bc.enabled = false;
         yield return new WaitForSeconds(player.aspd / 2);
-        bc.enabled = true;
 
         // Swing
         float time = 0;
+        bc.enabled = true;
         while (time < player.aspd)
         {
             var x = curve.Evaluate(time);
@@ -48,18 +49,10 @@ public class scythe : MonoBehaviour
             yield return null;
             time += Time.deltaTime;
         }
-
-        // Damage Enemies
-        yield return new WaitForSeconds(player.aspd / 5);
-        for (int i = 0; i < toDamage.Count; i++)
-        {
-            toDamage[i].damage(player.atk);
-        }
-        toDamage.Clear();
-
-        yield return new WaitForSeconds(player.aspd / 2);
-        
         bc.enabled = false;
+
+        yield return new WaitForSeconds(player.aspd / 2);   
+        
         sr.enabled = false;
         transform.localEulerAngles = new Vector3(0, 0, 45);
 
@@ -71,8 +64,14 @@ public class scythe : MonoBehaviour
     {
         if (other.TryGetComponent<IDamageable>(out IDamageable))
         {
-            var x = other.GetComponent<IDamageable>();
-            toDamage.Add(x);
+            other.GetComponent<IDamageable>().damage(player.atk);
+            if(data.fireAspectLvl > 0)
+            {
+                var dot = other.gameObject.AddComponent<DoT>();
+                dot.damage = (player.atk * 0.2f) * data.fireAspectLvl;
+                dot.duration = 3;
+                dot.tick = 0.5f;
+            }
         }
     }
 
