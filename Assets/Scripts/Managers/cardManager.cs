@@ -14,8 +14,12 @@ public class cardManager : MonoBehaviour
     public static cardManager instance;
 
     public List<CardEntry> cards = new List<CardEntry>();
-    public List<CardEntry> spawnableCards = new List<CardEntry>();
-    public Transform cardParent;
+    [Space]
+    public List<Transform> spawnPoints = new List<Transform>();
+    private List<CardEntry> spawnableCards = new List<CardEntry>();
+    [Space]
+    private List<GameObject> spawnedCards = new List<GameObject>();
+
     public int choices = 3;
     public GameObject cardPanel;
 
@@ -41,7 +45,10 @@ public class cardManager : MonoBehaviour
         List<int> index = new List<int>();
         for (int i = 0; i < cardsToSpawn; i++)
         {
+            print("index cycle iteration " + i);
+
             int x = Random.Range(0, spawnableCards.Count);
+            print("index " + x);
             if (index.Contains(x)) { i--; continue; }
             index.Add(x);
 
@@ -59,13 +66,18 @@ public class cardManager : MonoBehaviour
                 continue;
             }
 
-            GameObject spawnedCard = Instantiate(entry.prefab, cardParent);
-            spawnedCard.name = $"{entry.prefab.name} lvl {entry.effect.lvl}";
+            spawnedCards.Add(Instantiate(entry.prefab, spawnPoints[i]));
+            print("card spawned");
 
-            spawnedCard.TryGetComponent(out cardChoice choice);
+            spawnedCards[i].TryGetComponent(out cardChoice choice);
             if (choice != null)
             {
                 choice.setup(instance, entry);
+            }
+            else
+            {
+                print($"card {spawnedCards[i]} doesnt contain cardChoice");
+                continue;
             }
         }
     }
@@ -73,6 +85,7 @@ public class cardManager : MonoBehaviour
     public void pickCard(CardEntry entry)
     {
         if (!canSpawn(entry)) return;
+        print("card picked");
 
         entry.effect.GetComponent<ICardEffect>().cardEffect();
         clearSpawnedCards();
@@ -92,10 +105,9 @@ public class cardManager : MonoBehaviour
 
     private void clearSpawnedCards()
     {
-
-        foreach (Transform child in cardParent)
+        foreach (GameObject x in spawnedCards)
         {
-            Destroy(child.gameObject);
+            Destroy(x);
         }
     }
 }
