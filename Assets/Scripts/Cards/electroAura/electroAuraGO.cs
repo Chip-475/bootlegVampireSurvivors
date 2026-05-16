@@ -3,20 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(CircleCollider2D))]
-public class electroAura : cardClass
+public class electroAuraGO : cardClass, ICardEffect
 {
-    
     private List<GameObject> list = new List<GameObject>();
 
-    private void OnEnable()
+    private new void Start()
     {
-        active = true;
-
-        transform.localScale = new Vector3(radius * 2, radius * 2, 0);
-
         StartCoroutine(damage());
     }
-
     IEnumerator damage()
     {
         while (true)
@@ -37,5 +31,15 @@ public class electroAura : cardClass
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy")) list.Remove(collision.gameObject);
+    }
+
+    public void effect()
+    {
+        transform.localScale = new Vector2(radius * 2, radius * 2);
+        print("electroAura picked");
+    }
+    public void cardEffect()
+    {
+        effect();
     }
 }

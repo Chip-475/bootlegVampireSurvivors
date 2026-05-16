@@ -5,11 +5,8 @@ public class fireArea : cardClass
 {
     public CircleCollider2D circleCollider;
 
-    protected override void Start()
+    protected new void Start()
     {
-        base.Start();
-        active = true;
-
         circleCollider = GetComponent<CircleCollider2D>();
         Destroy(gameObject, duration);
 
@@ -26,11 +23,5 @@ public class fireArea : cardClass
             dot.duration = 5f;
             dot.tick = 1 / 3f;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.orange;
-        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

@@ -14,9 +14,12 @@ public class cardManager : MonoBehaviour
     public static cardManager instance;
 
     public List<CardEntry> cards = new List<CardEntry>();
+    [Space]
     public List<CardEntry> spawnableCards = new List<CardEntry>();
-    public Transform cardParent;
-    public int choices = 3;
+    public List<Transform> spawnPoints = new List<Transform>();
+    [Space]
+    public List<GameObject> spawnedCards = new List<GameObject>();
+
     public GameObject cardPanel;
 
     void Awake()
@@ -25,42 +28,44 @@ public class cardManager : MonoBehaviour
         spawnableCards = cards;
     }
 
+    [ContextMenu("Run spawnCards")]
     public void spawnCards()
     {
+        if(spawnableCards.Count == 0) { Debug.LogWarning("out of cards"); return; }
+
         Time.timeScale = 0;
         cardPanel.SetActive(true);
-
-        int cardsToSpawn = Mathf.Min(choices, spawnableCards.Count);
-        Debug.Log($"cardManager: {spawnableCards.Count} available cards out of {cards.Count} total.");
-
-        if (cardsToSpawn == 0)
-        {
-            Debug.LogWarning("cardManager: no valid cards to spawn.");
-            return;
-        }
+        int cardsToSpawn = Mathf.Min(3, spawnableCards.Count);
 
         List<int> index = new List<int>();
         for (int i = 0; i < cardsToSpawn; i++)
         {
-            int x = Random.Range(choices, spawnableCards.Count);
+            int x = Random.Range(0, spawnableCards.Count);
             if (index.Contains(x)) { i--; continue; }
             index.Add(x);
+            print($"index {x}");
 
             CardEntry entry = spawnableCards[x];
-            if (entry.levelable && entry.effect.lvl == 5)
+            if (entry.effect.lvl == 5)
             {
                 spawnableCards.Remove(entry);
                 i--;
                 continue;
             }
 
-            GameObject spawnedCard = Instantiate(entry.prefab, cardParent);
-            spawnedCard.name = $"{entry.prefab.name} lvl {entry.effect.lvl}";
+            spawnedCards.Add(Instantiate(entry.prefab, spawnPoints[i].transform.position, Quaternion.identity, cardPanel.transform));
+            print("card spawned");
 
-            spawnedCard.TryGetComponent(out cardChoice choice);
+            spawnedCards[i].TryGetComponent(out cardChoice choice);
             if (choice != null)
             {
                 choice.setup(instance, entry);
+            }
+            else
+            {
+                print($"card {spawnedCards[i]} doesnt contain cardChoice");
+                i--;
+                continue;
             }
         }
     }
@@ -68,9 +73,17 @@ public class cardManager : MonoBehaviour
     public void pickCard(CardEntry entry)
     {
         if (!canSpawn(entry)) return;
+        print("card picked");
 
+        entry.effect.GetComponent<ICardEffect>().cardEffect();
+        if (!entry.levelable)
+        {
+            spawnableCards.Remove(entry);
+        }
+        else entry.effect.lvl++;
         clearSpawnedCards();
         cardPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     private bool canSpawn(CardEntry entry)
@@ -86,10 +99,10 @@ public class cardManager : MonoBehaviour
 
     private void clearSpawnedCards()
     {
-
-        foreach (Transform child in cardParent)
+        foreach (GameObject x in spawnedCards)
         {
-            Destroy(child.gameObject);
+            Destroy(x);
         }
+        spawnedCards.Clear();
     }
 }

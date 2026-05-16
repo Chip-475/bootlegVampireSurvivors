@@ -20,7 +20,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     [Header("Stats")]
     [SerializeField] public float hp;
     [SerializeField ] public int spawnCost;
-    protected float hpMax;
+    public float hpMax;
     public float xpGiven;
     [SerializeField] public float atk;
     [SerializeField] public float spd;

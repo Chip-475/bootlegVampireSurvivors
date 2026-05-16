@@ -15,6 +15,7 @@ public class cardChoice : MonoBehaviour
     {
         if (manager != null && entry != null)
         {
+            Debug.Log("card picked");
             manager.pickCard(entry);
         }
     }
