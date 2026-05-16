@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class healthUp : MonoBehaviour, ICardEffect
+public class healthUp : cardClass, ICardEffect
 {
     public void effect()
     {

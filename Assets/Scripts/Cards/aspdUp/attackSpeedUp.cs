@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-public class attackSpeedUp : MonoBehaviour, ICardEffect
+public class attackSpeedUp : cardClass, ICardEffect
 {
     public void effect()
     {

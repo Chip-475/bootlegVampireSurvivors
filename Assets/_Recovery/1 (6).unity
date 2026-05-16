@@ -17885,7 +17885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
   obstacle:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   state: 0
   pauseMenu: {fileID: 1701881807}
 --- !u!1 &1622327813

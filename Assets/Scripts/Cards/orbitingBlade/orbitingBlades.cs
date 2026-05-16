@@ -1,6 +1,11 @@
 using UnityEngine;
 
-public class orbitingBlades : MonoBehaviour
+public class orbitingBlades : cardClass, ICardEffect
 {
     // To Do
+
+    public void cardEffect()
+    {
+
+    }
 }

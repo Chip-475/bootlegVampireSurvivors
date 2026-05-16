@@ -8,20 +8,23 @@ public class spawnManager : MonoBehaviour
     public int spawnLimit;
     public static int enemyCount;
     public bool isSpawning = false;
-    [ContextMenu("Run Function")]
+    
     private void Start()
     {
         waves = 0;
     }
     private void Update()
     {
-        //if (enemyCount <= 0 && !isSpawning)
-        //{
-        //    Invoke(nameof(newWave), 2.5f);
-        //    isSpawning = true;
-        //    waves++;
-        //}
+        if (enemyCount <= 0 && !isSpawning)
+        {
+            player.playerInstance.hp += player.playerInstance.hpMax * 0.2f;
+            Invoke(nameof(newWave), 2.5f);
+            isSpawning = true;
+            waves++;
+        }
     }
+
+    [ContextMenu("Run Function")]
     public void newWave()
     {
         spawnLimit = waves * 10;

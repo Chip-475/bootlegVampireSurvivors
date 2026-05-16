@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class damageUp : MonoBehaviour, ICardEffect
+public class damageUp : cardClass, ICardEffect
 {
     public void effect()
     {

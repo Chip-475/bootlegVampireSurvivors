@@ -3,27 +3,34 @@ using UnityEngine.InputSystem;
 
 public class gameManager : MonoBehaviour
 {
+    public static gameManager instance;
+    public enum gameState
+    {
+        running,
+        paused,
+    }
+    public LayerMask obstacle;
+    public gameState state = gameState.running;
     public GameObject pauseMenu;
 
     private void Start()
     {
-        data.isPaused = true;
-        togglePause();
+        instance = this;
     }
 
     public void togglePause()
     {
-        if (data.isPaused)
+        if (state == gameState.paused)
         {
-            data.isPaused = false;
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
+            state = gameState.running;
         }
         else
         {
-            data.isPaused = true;
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
+            state = gameState.paused;
         }
     }
 }

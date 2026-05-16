@@ -15,10 +15,11 @@ public class cardManager : MonoBehaviour
 
     public List<CardEntry> cards = new List<CardEntry>();
     [Space]
-    public List<CardEntry> spawnableCards = new List<CardEntry>();
+    private List<CardEntry> spawnableCards = new List<CardEntry>();
     public List<Transform> spawnPoints = new List<Transform>();
     [Space]
-    public List<GameObject> spawnedCards = new List<GameObject>();
+    private List<GameObject> spawnedCards = new List<GameObject>();
+    public List<CardEntry> pickedCards = new List<CardEntry>();
 
     public GameObject cardPanel;
 
@@ -56,7 +57,7 @@ public class cardManager : MonoBehaviour
             spawnedCards.Add(Instantiate(entry.prefab, spawnPoints[i].transform.position, Quaternion.identity, cardPanel.transform));
             print("card spawned");
 
-            spawnedCards[i].TryGetComponent(out cardChoice choice);
+            spawnedCards[i].TryGetComponent(out cardScript choice);
             if (choice != null)
             {
                 choice.setup(instance, entry);
@@ -75,6 +76,7 @@ public class cardManager : MonoBehaviour
         if (!canSpawn(entry)) return;
         print("card picked");
 
+        pickedCards.Add(entry);
         entry.effect.GetComponent<ICardEffect>().cardEffect();
         if (!entry.levelable)
         {

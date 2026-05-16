@@ -11,6 +11,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     public player player;
     public xpBar xpBar;
     protected Rigidbody2D prb;
+    protected Rigidbody2D rb;
     protected Collider2D _collider;
     protected NavMeshAgent _agent;
 
@@ -32,6 +33,7 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
     // Virtuals
     protected virtual void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
         playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj.GetComponent<player>();
         xpBar = playerObj.GetComponent<xpBar>();
@@ -39,14 +41,15 @@ public abstract class enemyClass : MonoBehaviour, IDamageable
         _collider = GetComponent<Collider2D>();
         _agent = GetComponent<NavMeshAgent>();
 
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+
         hpMax = hp;
     }
     protected virtual void FixedUpdate()
     {
-        _agent.SetDestination(playerObj.transform.position);
-        _agent.updateRotation = false;
-        _agent.updateUpAxis = false;
-        transform.rotation = utilitiesDB.LookAt2D(playerObj.transform.position - transform.position);
+        if (playerObj.transform.position.x < transform.position.x) transform.localScale = new Vector3(-1, 1, 1);
+        else transform.localScale = new Vector3(1, 1, 1);
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
