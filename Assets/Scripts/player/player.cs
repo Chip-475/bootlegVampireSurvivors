@@ -30,7 +30,7 @@ public class player : MonoBehaviour, IDamageable
 
     [Header("Stats")]
     public float hp;
-    private float hpMax;
+    public float hpMax;
     public float atk;
     public float spd;
     public float aspd;
