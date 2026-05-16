@@ -15083,6 +15083,7 @@ MonoBehaviour:
   mousePosition: {x: 0, y: 0, z: 0}
   mouseWorldPosition: {x: 0, y: 0, z: 0}
   hp: 100
+  hpMax: 0
   atk: 5
   spd: 7.5
   aspd: 0.5
@@ -15251,7 +15252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd527fe2961b5104e94e4f57247f1d0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::xpBar
-  xpBarObject: {fileID: 0}
+  xpBarObject: {fileID: 50403822}
   xpBarCurve:
     serializedVersion: 2
     m_Curve: []
@@ -15273,7 +15274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237f75183e331e241ae0cdc8b0ea15bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::hpBar
-  hpBarObject: {fileID: 0}
+  hpBarObject: {fileID: 78537520}
   hpBarCurve:
     serializedVersion: 2
     m_Curve: []
@@ -19584,10 +19585,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6aece9af6cdd75459838a1007a0326a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::uiManager
-  wave: {fileID: 0}
-  enemyKilled: {fileID: 0}
-  enemyRemaining: {fileID: 0}
+  wave: {fileID: 1936697426}
+  enemyKilled: {fileID: 1982183843}
+  enemyRemaining: {fileID: 1506795251}
   spawnManager: {fileID: 1127353844}
+  hpText: {fileID: 435693102}
+  xpText: {fileID: 228728098}
+  lvlText: {fileID: 1825382494}
+  player: {fileID: 621900517}
 --- !u!4 &2057710485
 Transform:
   m_ObjectHideFlags: 0
